@@ -1,0 +1,17 @@
+model BookingStatusHistory {
+  id Int @id @default(autoincrement())
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  status BookingStatus
+
+  changedBy   Int?
+  changedRole String?
+  note        String?
+
+  createdAt DateTime @default(now())
+
+  @@index([bookingId, createdAt])
+  @@index([changedBy])
+}
