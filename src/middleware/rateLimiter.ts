@@ -72,3 +72,16 @@ export const locationUpdateLimiter = rateLimit({
     legacyHeaders: false,
     message: json("Location is being sent too often. Send it every 30 seconds."),
 });
+
+/**
+ * Location search (/places): Google charges per call, so max 60 per minute
+ * per user. Typing a search sends a few calls; this leaves plenty of room.
+ */
+export const placesLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    limit: 60,
+    keyGenerator: (req: Request) => `places|${req.user?.id ?? ip(req)}`,
+    standardHeaders: "draft-8",
+    legacyHeaders: false,
+    message: json("Too many location searches. Please wait a moment."),
+});

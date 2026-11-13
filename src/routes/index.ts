@@ -10,6 +10,7 @@ import { ProviderRoutes } from "../module/Provider/provider.route.js";
 import { BookingRoutes } from "../module/booking/booking.route.js";
 import { AgencyRoutes } from "../module/agency/agency.route.js";
 import { AdminRoutes } from "../module/admin/admin.route.js";
+import { PlacesRoutes } from "../module/places/places.route.js";
 
 const router = Router();
 
@@ -62,6 +63,10 @@ const moduleRoutes = [
     {
         path: "/agencies",
         route: AgencyRoutes,
+    },
+    {
+        path: "/places",
+        route: PlacesRoutes,
     },
     {
         path: "/admin",

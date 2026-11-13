@@ -65,6 +65,10 @@ export const env = {
     // Number of reverse proxies in front of the app (for correct client IPs in rate limiting)
     TRUST_PROXY: int("TRUST_PROXY", 0),
 
+    // Admin account created on server start if missing (see src/seed/seed-admin.ts)
+    ADMIN_PHONE: process.env.ADMIN_PHONE?.trim() || undefined,
+    ADMIN_NAME: process.env.ADMIN_NAME?.trim() || "MDPCare Admin",
+
     DATABASE_URL: required("DATABASE_URL"),
     REDIS_URL: process.env.REDIS_URL || undefined,
 
@@ -90,6 +94,13 @@ export const env = {
     BOOKING_MAX_CANDIDATES_PER_ROUND: int("BOOKING_MAX_CANDIDATES_PER_ROUND", 25),
     BOOKING_SWEEP_INTERVAL_SECONDS: int("BOOKING_SWEEP_INTERVAL_SECONDS", 10),
     BOOKING_COMPLETION_OTP_TTL_MINUTES: int("BOOKING_COMPLETION_OTP_TTL_MINUTES", 240),
+    // Google Maps (location search, place details, address from GPS).
+    // Keep this key on the SERVER only. Without it, /places returns 503.
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY || undefined,
+    // Only change these for tests (they point at Google by default)
+    GOOGLE_PLACES_API_URL: process.env.GOOGLE_PLACES_API_URL || "https://places.googleapis.com/v1",
+    GOOGLE_GEOCODING_API_URL: process.env.GOOGLE_GEOCODING_API_URL || "https://maps.googleapis.com/maps/api/geocode/json",
+
     // Provider live location (app sends it every 30 seconds)
     // - every update is kept in Redis
     // - it is written to the database at most once every PROVIDER_LOCATION_DB_SAVE_SECONDS

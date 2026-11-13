@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma.js";
 import { AppError } from "../../errors/AppError.js";
 import type { Prisma } from "../../generated/prisma/client.js";
 import { notify } from "../booking/booking.notify.js";
+import { contactsInclude, withContacts } from "../booking/booking-contacts.js";
 
 type Tx = Prisma.TransactionClient;
 const ACTIVE_ASSIGNMENT = ["ASSIGNED", "ACCEPTED", "STARTED"] as const;
@@ -154,33 +155,32 @@ export const performerForAssignment = async (userId: number, assignmentId: numbe
     };
 };
 
-export const listMyAssignments = async (userId: number) =>
-    prisma.agencyBookingAssignment.findMany({
+// Staff: my active assignments. Each booking has contacts.customer (who to visit).
+export const listMyAssignments = async (userId: number) => {
+    const assignments = await prisma.agencyBookingAssignment.findMany({
         where: { staffMember: { userId, status: "ACTIVE" }, status: { in: [...ACTIVE_ASSIGNMENT] } },
         orderBy: { assignedAt: "desc" },
         select: {
             id: true, status: true, assignedAt: true, acceptedAt: true, startedAt: true, notes: true, agencyId: true,
-            booking: {
-                select: {
-                    id: true, bookingNumber: true, status: true, type: true, scheduledAt: true, fullAddress: true, landmark: true,
-                    latitude: true, longitude: true, customerName: true, customerPhone: true, estimatedDuration: true,
-                    items: { select: { serviceName: true, quantity: true } },
-                    user: { select: { name: true, phone: true } },
-                },
-            },
+            booking: { include: { ...contactsInclude, items: { select: { serviceName: true, quantity: true } } } },
         },
     });
 
-export const listAgencyBookings = async (agencyId: number, take = 50) =>
-    prisma.booking.findMany({
+    return assignments.map((assignment) => ({ ...assignment, booking: withContacts(assignment.booking) }));
+};
+
+// Owner / manager: the agency's bookings. Each booking has contacts.customer
+// and contacts.serviceProvider.staff (who was sent).
+export const listAgencyBookings = async (agencyId: number, take = 50) => {
+    const bookings = await prisma.booking.findMany({
         where: { agencyId },
         orderBy: { createdAt: "desc" },
         take,
-        include: {
-            items: true,
-            agencyAssignment: { select: { id: true, status: true, staffMember: { select: { id: true, displayName: true } } } },
-        },
+        include: { ...contactsInclude, items: true },
     });
+
+    return bookings.map(withContacts);
+};
 
 export const assignmentHistory = async (agencyId: number, bookingId: number) =>
     prisma.agencyAssignmentHistory.findMany({

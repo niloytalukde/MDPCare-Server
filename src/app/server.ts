@@ -6,6 +6,7 @@ import { prisma } from "../lib/prisma.js";
 import { closeRedisConnections } from "../lib/redis.js";
 import { initSocket, closeSocket } from "../socket/booking.socket.js";
 import { startBookingWorkers, stopBookingWorkers } from "../module/booking/booking-expiry.worker.js";
+import { seedAdmin } from "../seed/seed-admin.js";
 
 const SHUTDOWN_TIMEOUT_MS = 15_000;
 
@@ -14,6 +15,12 @@ const startServer = async () => {
         try {
             await prisma.$connect();
             console.log("Database connected successfully!");
+
+            // Make sure the admin from .env (ADMIN_PHONE) exists.
+            // If it fails, the server still starts - only the seed is skipped.
+            await seedAdmin().catch((seedError) => {
+                console.error("Admin seed failed:", (seedError as Error).message || seedError);
+            });
         } catch (dbError) {
             console.warn(
                 "Warning: Database connection could not be established on startup.\n" +

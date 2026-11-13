@@ -45,6 +45,7 @@ The customer can **cancel** until the job starts (`PENDING`, `SEARCHING_PROVIDER
 | 4 | `booking-work.service.ts` | Start, completion code, complete + wallet |
 | | `booking-cancel.service.ts` | Cancel |
 | | `booking-view.service.ts` | Who can see which booking; booking lists |
+| | `booking-contacts.ts` | The `contacts` section: customer ↔ provider / agency / staff details after accept |
 | | `booking-expiry.worker.ts` | Background job: next round, or EXPIRED |
 | | `booking-history.ts` | Saves every status change (the booking timeline) |
 | | `booking.notify.ts` | Live notifications to the apps |
@@ -62,7 +63,14 @@ Agency steps (accept as agency, assign staff, staff start/complete) have their U
 | Money is paid into a wallet only once | `settleBooking` runs inside the COMPLETED transaction, with a unique reference per booking |
 | Old bookings keep their price | Prices are copied into `BookingItem` when the booking is created |
 | Strangers can't see a booking | `booking-view.service.ts` returns 404 to anyone not involved |
-| Candidates don't see the customer's details | Name, phone and address are hidden until they accept |
+| Candidates don't see the customer's details | Name, phone and address are hidden until they accept (`contacts.customer` is `null`) |
+
+## Contact details after accept (`contacts` in every booking reply)
+
+| Who looks | Before accept | After accept |
+|---|---|---|
+| Provider / agency owner / manager / assigned staff | Only the job (no name, phone, exact address) | `contacts.customer` = name, phone, photo (+ `bookedBy` when booked for a family member) |
+| Customer | `contacts.serviceProvider` = `null` | Individual: name, phone, photo, profession, experience, rating. Agency: agency name, phone, logo + `staff` (name, phone, photo) once assigned |
 
 ## Settings (in `.env`)
 
