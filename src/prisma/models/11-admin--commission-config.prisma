@@ -1,0 +1,44 @@
+// =====================================================
+// Platform commission rules (NEW)
+// =====================================================
+
+enum CommissionType {
+  PERCENTAGE // value 15.00 means 15% of the booking amount
+  FLAT // value 50.00 means ₹50 per booking
+}
+
+/// A commission rule set by the admin.
+/// How the right rule is chosen (most specific wins):
+///   1. a rule for the exact service (serviceId set)
+///   2. else a rule for the service's category (categoryId set)
+///   3. else the global rule (both empty)
+/// The commission is COPIED onto the booking (Booking.platformFee), so
+/// changing a rule later never changes old bookings.
+model CommissionConfig {
+  id   Int    @id @default(autoincrement())
+  name String // e.g. "Default 15%" or "Nursing 10%"
+
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  serviceId  Int?
+  service    Service?  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  type  CommissionType @default(PERCENTAGE)
+  value Decimal        @db.Decimal(10, 2)
+
+  isActive      Boolean   @default(true)
+  effectiveFrom DateTime  @default(now())
+  effectiveTo   DateTime? // empty = no end date
+
+  updatedById Int?
+  updatedBy   User? @relation("CommissionUpdatedBy", fields: [updatedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive, serviceId])
+  @@index([isActive, categoryId])
+  @@index([categoryId])
+  @@index([serviceId])
+  @@index([updatedById])
+}

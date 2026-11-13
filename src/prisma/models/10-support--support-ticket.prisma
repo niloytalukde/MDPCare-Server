@@ -1,0 +1,85 @@
+// =====================================================
+// Complaints, disputes and help requests (NEW)
+// =====================================================
+
+enum SupportTicketCategory {
+  BOOKING
+  PAYMENT
+  REFUND
+  PROVIDER
+  AGENCY
+  ACCOUNT
+  OTHER
+}
+
+enum SupportTicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING_FOR_USER
+  RESOLVED
+  CLOSED
+}
+
+/// A complaint, dispute or help request. Anyone can create one;
+/// an ADMIN or SUPPORT user handles it.
+model SupportTicket {
+  id           Int    @id @default(autoincrement())
+  ticketNumber String @unique // shown to the user, e.g. "TCK-2026-000123"
+
+  createdById Int
+  createdBy   User @relation("TicketCreatedBy", fields: [createdById], references: [id], onDelete: Restrict)
+
+  bookingId Int? // optional: the booking the ticket is about
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  category SupportTicketCategory
+  priority SupportTicketPriority @default(MEDIUM)
+  status   SupportTicketStatus   @default(OPEN)
+
+  subject     String
+  description String
+
+  assignedToId Int? // the admin / support person handling it
+  assignedTo   User? @relation("TicketAssignedTo", fields: [assignedToId], references: [id], onDelete: SetNull)
+
+  resolution String?
+  resolvedAt DateTime?
+  closedAt   DateTime?
+
+  messages SupportTicketMessage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdById, createdAt])
+  @@index([status, priority])
+  @@index([assignedToId, status])
+  @@index([bookingId])
+}
+
+/// One message in a support ticket conversation.
+model SupportTicketMessage {
+  id Int @id @default(autoincrement())
+
+  ticketId Int
+  ticket   SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+
+  senderId Int
+  sender   User @relation(fields: [senderId], references: [id], onDelete: Restrict)
+
+  message       String
+  attachmentUrl String?
+  isInternal    Boolean @default(false) // true = note for admins only, the user never sees it
+
+  createdAt DateTime @default(now())
+
+  @@index([ticketId, createdAt])
+  @@index([senderId])
+}

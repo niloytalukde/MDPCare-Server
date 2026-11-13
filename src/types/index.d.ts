@@ -1,9 +1,12 @@
+import type { UserRoleType } from "../generated/prisma/enums.js";
+
 export interface AuthUser {
     id: number;
     phone?: string;
     email?: string | null;
     name?: string | null;
-    [key: string]: unknown;
+    roles: UserRoleType[];
+    tokenVersion: number;
 }
 
 declare global {

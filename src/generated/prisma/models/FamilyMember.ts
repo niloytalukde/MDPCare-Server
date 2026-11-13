@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model FamilyMember
- * 
+ * A family member a customer can book a service for.
  */
 export type FamilyMemberModel = runtime.Types.Result.DefaultSelection<Prisma.$FamilyMemberPayload>
 

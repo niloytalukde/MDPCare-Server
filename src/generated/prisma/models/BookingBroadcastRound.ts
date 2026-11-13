@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model BookingBroadcastRound
- * 
+ * One search round: 'look for providers/agencies within X km for Y seconds'.
  */
 export type BookingBroadcastRoundModel = runtime.Types.Result.DefaultSelection<Prisma.$BookingBroadcastRoundPayload>
 
@@ -554,24 +554,8 @@ export type BookingBroadcastRoundOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type EnumBookingRoundStatusFieldUpdateOperationsInput = {
   set?: $Enums.BookingRoundStatus
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type BookingBroadcastRoundCreateNestedManyWithoutBookingInput = {

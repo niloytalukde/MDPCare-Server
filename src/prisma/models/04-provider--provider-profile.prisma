@@ -1,0 +1,98 @@
+// =====================================================
+// Individual provider profile
+// =====================================================
+
+enum ProviderStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum ProviderAvailabilityStatus {
+  ONLINE
+  OFFLINE
+  BUSY
+}
+
+enum ProviderVerificationStatus {
+  NOT_SUBMITTED
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum ProviderDocumentType {
+  PROFILE_PHOTO
+  ID_PROOF
+  ADDRESS_PROOF
+  CERTIFICATE
+  LICENSE
+  OTHER
+}
+
+/// The work profile of an individual provider: approval, online status, location and stats.
+model ProviderProfile {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Professional information
+  displayName     String?
+  bio             String?
+  experienceYears Int     @default(0)
+  profession      String? // e.g. "Nurse", "Caregiver", "Physiotherapist" (NEW)
+
+  // Where the provider lives / works from (NEW). Live GPS location is below.
+  address String?
+  city    String?
+  state   String?
+  pincode String?
+
+  wallet ProviderWallet?
+
+  // Provider approval
+  status             ProviderStatus             @default(PENDING)
+  verificationStatus ProviderVerificationStatus @default(NOT_SUBMITTED)
+  rejectionReason    String?
+  verifiedAt         DateTime?
+  approvedAt         DateTime?
+
+  // Availability
+  availabilityStatus ProviderAvailabilityStatus @default(OFFLINE)
+  isAvailable        Boolean                    @default(false)
+
+  // Live location
+  latitude          Decimal?  @db.Decimal(10, 7)
+  longitude         Decimal?  @db.Decimal(10, 7)
+  locationUpdatedAt DateTime?
+  serviceRadiusKm   Int       @default(10)
+
+  // Professional statistics
+  averageRating     Decimal @default(0) @db.Decimal(3, 2)
+  totalReviews      Int     @default(0)
+  totalBookings     Int     @default(0)
+  completedBookings Int     @default(0)
+  cancelledBookings Int     @default(0)
+
+  // Payment information
+  bankAccountVerified Boolean @default(false)
+
+  // Relations
+  services     ProviderService[]
+  documents    ProviderDocument[]
+  availability ProviderAvailability[]
+
+  bookings        Booking[]
+  bookingRequests BookingProvider[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Reviews customers left for this provider
+  reviews Review[]
+
+  @@index([status, availabilityStatus, isAvailable])
+  @@index([latitude, longitude])
+  @@index([verificationStatus])
+}

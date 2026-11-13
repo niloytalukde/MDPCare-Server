@@ -1,0 +1,79 @@
+// =====================================================
+// Users and their roles
+// =====================================================
+
+enum AccountStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum UserRoleType {
+  CUSTOMER
+  PROVIDER
+  AGENCY_OWNER
+  AGENCY_STAFF
+  ADMIN
+  SUPPORT
+}
+
+/// One person who uses MDPCare (customer, provider, agency owner/staff or admin). Login is by phone OTP.
+model User {
+  id                Int              @id @default(autoincrement())
+  email             String?          @unique
+  name              String?
+  phone             String           @unique
+  gender            String?
+  // Personal details shared by customers, providers and agency people (NEW)
+  dateOfBirth       DateTime?        @db.Date
+  profileImageUrl   String?
+  location          Address[]
+  familyMembers     FamilyMember[]
+  accountStatus     AccountStatus    @default(ACTIVE)
+  bookings          Booking[]
+  providerProfile   ProviderProfile?
+  agencyMemberships AgencyMember[]
+  isPhoneVerified   Boolean          @default(false)
+  isEmailVerified   Boolean          @default(false)
+  fcmToken          String?
+  // Incremented on logout / block to revoke all outstanding refresh tokens
+  tokenVersion      Int              @default(0)
+  deviceImei        String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  userRoles         UserRole[]
+
+  // ----- Added for the full platform -----
+  deviceTokens      DeviceToken[] // phones that receive push notifications
+  notifications     Notification[]
+  payments          Payment[] // payments made as a customer
+  reviews           Review[] // reviews written as a customer
+  refundsRequested  Refund[]               @relation("RefundRequestedBy")
+  refundsProcessed  Refund[]               @relation("RefundProcessedBy")
+  supportTickets    SupportTicket[]        @relation("TicketCreatedBy")
+  assignedTickets   SupportTicket[]        @relation("TicketAssignedTo")
+  ticketMessages    SupportTicketMessage[]
+  commissionChanges CommissionConfig[]     @relation("CommissionUpdatedBy")
+  settingChanges    PlatformSetting[]      @relation("SettingUpdatedBy")
+  auditLogs         AuditLog[]
+}
+
+/// Which roles a user has. One user can have several (e.g. CUSTOMER + PROVIDER).
+model UserRole {
+  id     Int          @id @default(autoincrement())
+  userId Int
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   UserRoleType
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, role])
+  @@index([role])
+}

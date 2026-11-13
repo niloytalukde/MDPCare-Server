@@ -1,0 +1,33 @@
+// =====================================================
+// Values shared by BOTH wallets
+// =====================================================
+
+enum WalletTransactionType {
+  CREDIT
+  DEBIT
+}
+
+enum WalletTransactionReason {
+  BOOKING_PAYMENT
+  PLATFORM_COMMISSION
+  REFUND
+  PAYOUT
+  BONUS
+  PENALTY
+  WALLET_ADJUSTMENT
+}
+
+enum WalletTransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REVERSED
+}
+
+enum PayoutStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REJECTED
+}

@@ -1,0 +1,42 @@
+// =====================================================
+// Agency verification documents
+// =====================================================
+
+enum AgencyDocumentType {
+  BUSINESS_LICENSE
+  GST_CERTIFICATE
+  PAN_CARD
+  OWNER_ID_PROOF
+  ADDRESS_PROOF
+  BANK_PROOF
+  CERTIFICATE
+  OTHER
+}
+
+enum AgencyDocumentStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+/// A business document an agency uploads for admin verification.
+model AgencyDocument {
+  id Int @id @default(autoincrement())
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  type           AgencyDocumentType
+  documentNumber String?
+  fileUrl        String
+
+  status          AgencyDocumentStatus @default(PENDING)
+  rejectionReason String?
+  verifiedAt      DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([agencyId, type])
+  @@index([status])
+}

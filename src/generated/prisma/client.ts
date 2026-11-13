@@ -31,8 +31,8 @@ export * from "./enums.js"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more BookingBroadcastRounds
- * const bookingBroadcastRounds = await prisma.bookingBroadcastRound.findMany()
+ * // Fetch zero or more OtpCodes
+ * const otpCodes = await prisma.otpCode.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,92 +42,251 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model BookingBroadcastRound
- * 
- */
-export type BookingBroadcastRound = Prisma.BookingBroadcastRoundModel
-/**
- * Model BookingCancellation
- * 
- */
-export type BookingCancellation = Prisma.BookingCancellationModel
-/**
- * Model BookingItem
- * 
- */
-export type BookingItem = Prisma.BookingItemModel
-/**
- * Model BookingOTP
- * 
- */
-export type BookingOTP = Prisma.BookingOTPModel
-/**
- * Model BookingProvider
- * 
- */
-export type BookingProvider = Prisma.BookingProviderModel
-/**
- * Model BookingStatusHistory
- * 
- */
-export type BookingStatusHistory = Prisma.BookingStatusHistoryModel
-/**
- * Model Booking
- * 
- */
-export type Booking = Prisma.BookingModel
-/**
- * Model Category
- * 
- */
-export type Category = Prisma.CategoryModel
-/**
  * Model OtpCode
- * 
+ * A one-time login/registration code sent by SMS. Only the hash is stored, never the code.
  */
 export type OtpCode = Prisma.OtpCodeModel
 /**
+ * Model ProviderOTP
+ * OLD / UNUSED. Replaced by OtpCode. Waiting for approval before it is deleted.
+ */
+export type ProviderOTP = Prisma.ProviderOTPModel
+/**
+ * Model Category
+ * A group of services, e.g. 'Cleaning' or 'Nursing'. Created by the admin.
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Service
+ * One service customers can book, with the price set by the admin.
+ */
+export type Service = Prisma.ServiceModel
+/**
+ * Model ProviderAvailability
+ * The weekly working hours of a provider (one row per day/time slot).
+ */
+export type ProviderAvailability = Prisma.ProviderAvailabilityModel
+/**
+ * Model ProviderDocument
+ * An ID/certificate a provider uploads so the admin can verify them.
+ */
+export type ProviderDocument = Prisma.ProviderDocumentModel
+/**
  * Model ProviderProfile
- * 
+ * The work profile of an individual provider: approval, online status, location and stats.
  */
 export type ProviderProfile = Prisma.ProviderProfileModel
 /**
  * Model ProviderService
- * 
+ * Which admin services an individual provider can do.
  */
 export type ProviderService = Prisma.ProviderServiceModel
 /**
- * Model ProviderDocument
- * 
+ * Model AgencyAvailability
+ * The weekly working hours of an agency.
  */
-export type ProviderDocument = Prisma.ProviderDocumentModel
+export type AgencyAvailability = Prisma.AgencyAvailabilityModel
 /**
- * Model ProviderAvailability
- * 
+ * Model AgencyDocument
+ * A business document an agency uploads for admin verification.
  */
-export type ProviderAvailability = Prisma.ProviderAvailabilityModel
+export type AgencyDocument = Prisma.AgencyDocumentModel
 /**
- * Model Service
- * 
+ * Model AgencyInvitation
+ * An invite sent by the agency to a phone number to join as staff.
  */
-export type Service = Prisma.ServiceModel
+export type AgencyInvitation = Prisma.AgencyInvitationModel
+/**
+ * Model AgencyMember
+ * A person inside an agency: OWNER, MANAGER or STAFF.
+ */
+export type AgencyMember = Prisma.AgencyMemberModel
+/**
+ * Model AgencyService
+ * Which admin services an agency can do.
+ */
+export type AgencyService = Prisma.AgencyServiceModel
+/**
+ * Model AgencyStaffService
+ * Which services each staff member is trained for.
+ */
+export type AgencyStaffService = Prisma.AgencyStaffServiceModel
+/**
+ * Model Agency
+ * A company that does services with its own staff. Bookings and money belong to the agency.
+ */
+export type Agency = Prisma.AgencyModel
+/**
+ * Model AgencyBookingAssignment
+ * Which staff member is CURRENTLY doing an agency booking.
+ */
+export type AgencyBookingAssignment = Prisma.AgencyBookingAssignmentModel
+/**
+ * Model AgencyAssignmentHistory
+ * Every assign / reassign / accept / start of agency staff (never edited, only added).
+ */
+export type AgencyAssignmentHistory = Prisma.AgencyAssignmentHistoryModel
+/**
+ * Model BookingStatusHistory
+ * Every status change of a booking (never edited, only added).
+ */
+export type BookingStatusHistory = Prisma.BookingStatusHistoryModel
+/**
+ * Model BookingCancellation
+ * Who cancelled a booking and why.
+ */
+export type BookingCancellation = Prisma.BookingCancellationModel
+/**
+ * Model BookingItem
+ * One service inside a booking, with the price copied at booking time.
+ */
+export type BookingItem = Prisma.BookingItemModel
+/**
+ * Model BookingOTP
+ * The start / completion code the customer gives the provider. Only the hash is stored.
+ */
+export type BookingOTP = Prisma.BookingOTPModel
+/**
+ * Model BookingBroadcastRound
+ * One search round: 'look for providers/agencies within X km for Y seconds'.
+ */
+export type BookingBroadcastRound = Prisma.BookingBroadcastRoundModel
+/**
+ * Model BookingProvider
+ * A booking request sent to one individual provider in a search round.
+ */
+export type BookingProvider = Prisma.BookingProviderModel
+/**
+ * Model BookingAgency
+ * A booking request sent to one agency in a search round.
+ */
+export type BookingAgency = Prisma.BookingAgencyModel
+/**
+ * Model Booking
+ * One customer order. Belongs to EITHER one provider OR one agency, never both.
+ */
+export type Booking = Prisma.BookingModel
+/**
+ * Model Review
+ * A customer's rating after a COMPLETED booking. One review per booking.
+ * Rating must be 1 to 5 (checked by the database too).
+ */
+export type Review = Prisma.ReviewModel
+/**
+ * Model AgencyWallet
+ * Money balance of an agency. Only the OWNER controls it.
+ */
+export type AgencyWallet = Prisma.AgencyWalletModel
+/**
+ * Model AgencyWalletTransaction
+ * One money movement in an agency wallet (never edited, only added).
+ */
+export type AgencyWalletTransaction = Prisma.AgencyWalletTransactionModel
+/**
+ * Model AgencyWalletPayout
+ * An agency's request to withdraw money to its bank.
+ */
+export type AgencyWalletPayout = Prisma.AgencyWalletPayoutModel
+/**
+ * Model ProviderWallet
+ * Money balance of an individual provider.
+ */
+export type ProviderWallet = Prisma.ProviderWalletModel
+/**
+ * Model WalletTransaction
+ * One money movement in a provider wallet (never edited, only added).
+ */
+export type WalletTransaction = Prisma.WalletTransactionModel
+/**
+ * Model WalletPayout
+ * A provider's request to withdraw money to their bank.
+ */
+export type WalletPayout = Prisma.WalletPayoutModel
+/**
+ * Model Payment
+ * One payment attempt for a booking (online or cash).
+ * A booking can have more than one row, e.g. a failed attempt and then a successful one.
+ * IMPORTANT: an online payment is only PAID after the gateway confirms it (webhook),
+ * never because the app says so.
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model PaymentWebhookEvent
+ * Every message the payment gateway sends us (webhook), saved BEFORE we act on it.
+ * The unique (gateway, eventId) stops the same event from crediting a wallet twice.
+ */
+export type PaymentWebhookEvent = Prisma.PaymentWebhookEventModel
+/**
+ * Model Refund
+ * Money sent back to a customer for a payment (full or part).
+ */
+export type Refund = Prisma.RefundModel
+/**
+ * Model Notification
+ * A message shown in the app's notification list. A push notification is
+ * sent to the user's DeviceTokens by a background job.
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model SupportTicket
+ * A complaint, dispute or help request. Anyone can create one;
+ * an ADMIN or SUPPORT user handles it.
+ */
+export type SupportTicket = Prisma.SupportTicketModel
+/**
+ * Model SupportTicketMessage
+ * One message in a support ticket conversation.
+ */
+export type SupportTicketMessage = Prisma.SupportTicketMessageModel
+/**
+ * Model AuditLog
+ * A record of an important action: who did it, to what, and what changed.
+ * Only ever ADD rows here; never update or delete them.
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model CommissionConfig
+ * A commission rule set by the admin.
+ * How the right rule is chosen (most specific wins):
+ * 1. a rule for the exact service (serviceId set)
+ * 2. else a rule for the service's category (categoryId set)
+ * 3. else the global rule (both empty)
+ * The commission is COPIED onto the booking (Booking.platformFee), so
+ * changing a rule later never changes old bookings.
+ */
+export type CommissionConfig = Prisma.CommissionConfigModel
+/**
+ * Model PlatformSetting
+ * A setting the admin can change without a new deploy, stored as key -> value.
+ * Examples:
+ * "booking.searchRadiiKm"       -> [3, 6, 10]
+ * "booking.roundTimeoutSeconds" -> 60
+ * "booking.cancellationFreeMinutes" -> 5
+ */
+export type PlatformSetting = Prisma.PlatformSettingModel
 /**
  * Model Address
- * 
+ * A saved address of a customer (home, work...). Bookings copy the address so old bookings never change.
  */
 export type Address = Prisma.AddressModel
 /**
+ * Model DeviceToken
+ * One phone (or browser) that can receive push notifications for a user.
+ * A user can have several phones, so this is a separate table.
+ */
+export type DeviceToken = Prisma.DeviceTokenModel
+/**
  * Model FamilyMember
- * 
+ * A family member a customer can book a service for.
  */
 export type FamilyMember = Prisma.FamilyMemberModel
 /**
- * Model UserRole
- * 
- */
-export type UserRole = Prisma.UserRoleModel
-/**
  * Model User
- * 
+ * One person who uses MDPCare (customer, provider, agency owner/staff or admin). Login is by phone OTP.
  */
 export type User = Prisma.UserModel
+/**
+ * Model UserRole
+ * Which roles a user has. One user can have several (e.g. CUSTOMER + PROVIDER).
+ */
+export type UserRole = Prisma.UserRoleModel

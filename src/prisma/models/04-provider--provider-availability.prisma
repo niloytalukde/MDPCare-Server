@@ -1,0 +1,24 @@
+// =====================================================
+// Provider weekly working hours
+// =====================================================
+
+/// The weekly working hours of a provider (one row per day/time slot).
+model ProviderAvailability {
+  id Int @id @default(autoincrement())
+
+  providerId Int
+  provider   ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  // 0 = Sunday, 1 = Monday ... 6 = Saturday
+  dayOfWeek Int
+
+  startTime String // Example: "09:00"
+  endTime   String // Example: "18:00"
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([providerId, dayOfWeek, isActive])
+}

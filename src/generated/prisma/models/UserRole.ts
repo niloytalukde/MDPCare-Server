@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model UserRole
- * 
+ * Which roles a user has. One user can have several (e.g. CUSTOMER + PROVIDER).
  */
 export type UserRoleModel = runtime.Types.Result.DefaultSelection<Prisma.$UserRolePayload>
 
@@ -302,6 +302,16 @@ export type UserRoleUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserRoleListRelationFilter = {
+  every?: Prisma.UserRoleWhereInput
+  some?: Prisma.UserRoleWhereInput
+  none?: Prisma.UserRoleWhereInput
+}
+
+export type UserRoleOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type UserRoleUserIdRoleCompoundUniqueInput = {
   userId: number
   role: $Enums.UserRoleType
@@ -336,20 +346,6 @@ export type UserRoleMinOrderByAggregateInput = {
 export type UserRoleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-}
-
-export type UserRoleListRelationFilter = {
-  every?: Prisma.UserRoleWhereInput
-  some?: Prisma.UserRoleWhereInput
-  none?: Prisma.UserRoleWhereInput
-}
-
-export type UserRoleOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
-export type EnumUserRoleTypeFieldUpdateOperationsInput = {
-  set?: $Enums.UserRoleType
 }
 
 export type UserRoleCreateNestedManyWithoutUserInput = {
@@ -392,6 +388,10 @@ export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.UserRoleUpdateWithWhereUniqueWithoutUserInput | Prisma.UserRoleUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.UserRoleUpdateManyWithWhereWithoutUserInput | Prisma.UserRoleUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.UserRoleScalarWhereInput | Prisma.UserRoleScalarWhereInput[]
+}
+
+export type EnumUserRoleTypeFieldUpdateOperationsInput = {
+  set?: $Enums.UserRoleType
 }
 
 export type UserRoleCreateWithoutUserInput = {

@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model BookingOTP
- * 
+ * The start / completion code the customer gives the provider. Only the hash is stored.
  */
 export type BookingOTPModel = runtime.Types.Result.DefaultSelection<Prisma.$BookingOTPPayload>
 

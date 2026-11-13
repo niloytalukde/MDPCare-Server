@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model BookingStatusHistory
- * 
+ * Every status change of a booking (never edited, only added).
  */
 export type BookingStatusHistoryModel = runtime.Types.Result.DefaultSelection<Prisma.$BookingStatusHistoryPayload>
 

@@ -1,0 +1,63 @@
+// =====================================================
+// Agency owner, managers and staff
+// =====================================================
+
+enum AgencyMemberRole {
+  OWNER
+  MANAGER // can accept bookings and assign staff, but cannot touch the wallet
+  STAFF
+}
+
+enum AgencyMemberStatus {
+  INVITED
+  ACTIVE
+  SUSPENDED
+  REMOVED
+}
+
+/// A person inside an agency: OWNER, MANAGER or STAFF.
+model AgencyMember {
+  id Int @id @default(autoincrement())
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role   AgencyMemberRole   @default(STAFF)
+  status AgencyMemberStatus @default(INVITED)
+
+  // Member profile
+  displayName     String?
+  phone           String?
+  profileImageUrl String?
+  experienceYears Int     @default(0)
+
+  joinedAt  DateTime?
+  removedAt DateTime?
+
+  // Staff services
+  services AgencyStaffService[]
+
+  // Booking assignments
+  assignments AgencyBookingAssignment[] @relation("AssignedStaff")
+  assignedBy  AgencyBookingAssignment[] @relation("AssignedBy")
+
+  // Assignment audit trail
+  historyAsStaff AgencyAssignmentHistory[] @relation("HistoryStaff")
+  historyAsActor AgencyAssignmentHistory[] @relation("HistoryActor")
+
+  // Invitations created by this member
+  sentInvitations AgencyInvitation[] @relation("InvitationSentBy")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Reviews for jobs this staff member performed
+  reviews Review[]
+
+  @@unique([agencyId, userId])
+  @@index([agencyId, role, status])
+  @@index([userId, status])
+}

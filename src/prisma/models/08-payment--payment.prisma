@@ -1,0 +1,88 @@
+// =====================================================
+// Customer payments and gateway webhooks (NEW)
+// =====================================================
+
+enum PaymentMethod {
+  ONLINE
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  PARTIALLY_REFUNDED
+  REFUNDED
+}
+
+enum WebhookEventStatus {
+  RECEIVED // saved, not handled yet
+  PROCESSED // handled successfully
+  FAILED // handling failed, can be retried
+  IGNORED // event we do not care about
+}
+
+/// One payment attempt for a booking (online or cash).
+/// A booking can have more than one row, e.g. a failed attempt and then a successful one.
+/// IMPORTANT: an online payment is only PAID after the gateway confirms it (webhook),
+/// never because the app says so.
+model Payment {
+  id Int @id @default(autoincrement())
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+
+  userId Int // the customer who pays
+  user   User @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  method PaymentMethod
+  status PaymentStatus @default(PENDING)
+
+  amount         Decimal @db.Decimal(12, 2)
+  refundedAmount Decimal @default(0) @db.Decimal(12, 2)
+  currency       String  @default("INR")
+
+  // Online payment details (empty for cash)
+  gateway          String? // e.g. "razorpay"; kept as text so we can change gateway later
+  gatewayOrderId   String? @unique
+  gatewayPaymentId String? @unique
+
+  failureReason String?
+  metadata      Json? // extra data from the gateway, for debugging
+
+  paidAt DateTime?
+
+  webhookEvents PaymentWebhookEvent[]
+  refunds       Refund[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([bookingId])
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+/// Every message the payment gateway sends us (webhook), saved BEFORE we act on it.
+/// The unique (gateway, eventId) stops the same event from crediting a wallet twice.
+model PaymentWebhookEvent {
+  id Int @id @default(autoincrement())
+
+  gateway   String // e.g. "razorpay"
+  eventId   String // the gateway's own id for this event
+  eventType String // e.g. "payment.captured"
+  payload   Json // the full body exactly as received
+
+  status       WebhookEventStatus @default(RECEIVED)
+  errorMessage String?
+
+  paymentId Int?
+  payment   Payment? @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
+  receivedAt  DateTime  @default(now())
+  processedAt DateTime?
+
+  @@unique([gateway, eventId])
+  @@index([paymentId])
+  @@index([status, receivedAt])
+}

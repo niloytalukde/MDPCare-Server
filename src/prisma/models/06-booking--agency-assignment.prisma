@@ -1,0 +1,85 @@
+// =====================================================
+// Agency staff assigned to a booking
+// =====================================================
+
+enum AgencyAssignmentStatus {
+  ASSIGNED
+  ACCEPTED
+  REJECTED
+  STARTED
+  COMPLETED
+  CANCELLED
+  REASSIGNED
+}
+
+/// Which staff member is CURRENTLY doing an agency booking.
+model AgencyBookingAssignment {
+  id Int @id @default(autoincrement())
+
+  // One current assignment per booking
+  bookingId Int     @unique
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Restrict)
+
+  // Assigned staff member
+  staffMemberId Int
+  staffMember   AgencyMember @relation("AssignedStaff", fields: [staffMemberId], references: [id], onDelete: Restrict)
+
+  // Owner who assigned the staff
+  assignedById Int
+  assignedBy   AgencyMember @relation("AssignedBy", fields: [assignedById], references: [id], onDelete: Restrict)
+
+  status AgencyAssignmentStatus @default(ASSIGNED)
+
+  assignedAt  DateTime  @default(now())
+  acceptedAt  DateTime?
+  startedAt   DateTime?
+  completedAt DateTime?
+  cancelledAt DateTime?
+
+  notes           String?
+  rejectionReason String?
+
+  history AgencyAssignmentHistory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([agencyId, status])
+  @@index([staffMemberId, status])
+  @@index([assignedById])
+}
+
+/// Every assign / reassign / accept / start of agency staff (never edited, only added).
+model AgencyAssignmentHistory {
+  id Int @id @default(autoincrement())
+
+  assignmentId Int
+  assignment   AgencyBookingAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Restrict)
+
+  staffMemberId Int
+  staffMember   AgencyMember @relation("HistoryStaff", fields: [staffMemberId], references: [id], onDelete: Restrict)
+
+  // Member who performed the action (owner assigning, staff accepting, ...). Null for SYSTEM.
+  actorMemberId Int?
+  actorMember   AgencyMember? @relation("HistoryActor", fields: [actorMemberId], references: [id], onDelete: Restrict)
+
+  status AgencyAssignmentStatus
+  note   String?
+
+  createdAt DateTime @default(now())
+
+  @@index([bookingId, createdAt])
+  @@index([assignmentId])
+  @@index([agencyId, createdAt])
+  @@index([staffMemberId])
+  @@index([actorMemberId])
+}

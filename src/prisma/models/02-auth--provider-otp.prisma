@@ -1,0 +1,16 @@
+// =====================================================
+// OLD table, not used by any code
+// =====================================================
+
+/// OLD / UNUSED. Replaced by OtpCode. Waiting for approval before it is deleted.
+model ProviderOTP {
+  id         Int       @id @default(autoincrement())
+  phone      String
+  otpHash    String
+  expiresAt  DateTime
+  verifiedAt DateTime?
+  attempts   Int       @default(0)
+  createdAt  DateTime  @default(now())
+
+  @@index([phone, createdAt])
+}

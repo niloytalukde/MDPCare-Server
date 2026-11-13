@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model BookingItem
- * 
+ * One service inside a booking, with the price copied at booking time.
  */
 export type BookingItemModel = runtime.Types.Result.DefaultSelection<Prisma.$BookingItemPayload>
 
@@ -460,6 +460,16 @@ export type BookingItemUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type BookingItemListRelationFilter = {
+  every?: Prisma.BookingItemWhereInput
+  some?: Prisma.BookingItemWhereInput
+  none?: Prisma.BookingItemWhereInput
+}
+
+export type BookingItemOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type BookingItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   bookingId?: Prisma.SortOrder
@@ -524,78 +534,6 @@ export type BookingItemSumOrderByAggregateInput = {
   durationMinutes?: Prisma.SortOrder
 }
 
-export type BookingItemListRelationFilter = {
-  every?: Prisma.BookingItemWhereInput
-  some?: Prisma.BookingItemWhereInput
-  none?: Prisma.BookingItemWhereInput
-}
-
-export type BookingItemOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type BookingItemCreateNestedManyWithoutBookingInput = {
-  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
-  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
-  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
-  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-}
-
-export type BookingItemUncheckedCreateNestedManyWithoutBookingInput = {
-  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
-  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
-  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
-  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-}
-
-export type BookingItemUpdateManyWithoutBookingNestedInput = {
-  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
-  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
-  upsert?: Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput[]
-  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
-  set?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  disconnect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  delete?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  update?: Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput[]
-  updateMany?: Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput | Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput[]
-  deleteMany?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
-}
-
-export type BookingItemUncheckedUpdateManyWithoutBookingNestedInput = {
-  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
-  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
-  upsert?: Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput[]
-  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
-  set?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  disconnect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  delete?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
-  update?: Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput[]
-  updateMany?: Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput | Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput[]
-  deleteMany?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
-}
-
 export type BookingItemCreateNestedManyWithoutServiceInput = {
   create?: Prisma.XOR<Prisma.BookingItemCreateWithoutServiceInput, Prisma.BookingItemUncheckedCreateWithoutServiceInput> | Prisma.BookingItemCreateWithoutServiceInput[] | Prisma.BookingItemUncheckedCreateWithoutServiceInput[]
   connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutServiceInput | Prisma.BookingItemCreateOrConnectWithoutServiceInput[]
@@ -638,72 +576,46 @@ export type BookingItemUncheckedUpdateManyWithoutServiceNestedInput = {
   deleteMany?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
 }
 
-export type BookingItemCreateWithoutBookingInput = {
-  serviceName: string
-  serviceImage?: string | null
-  quantity?: number
-  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  durationMinutes?: number | null
-  createdAt?: Date | string
-  service: Prisma.ServiceCreateNestedOneWithoutBookingItemsInput
+export type BookingItemCreateNestedManyWithoutBookingInput = {
+  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
+  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
+  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
+  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
 }
 
-export type BookingItemUncheckedCreateWithoutBookingInput = {
-  id?: number
-  serviceId: number
-  serviceName: string
-  serviceImage?: string | null
-  quantity?: number
-  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  durationMinutes?: number | null
-  createdAt?: Date | string
+export type BookingItemUncheckedCreateNestedManyWithoutBookingInput = {
+  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
+  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
+  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
+  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
 }
 
-export type BookingItemCreateOrConnectWithoutBookingInput = {
-  where: Prisma.BookingItemWhereUniqueInput
-  create: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput>
+export type BookingItemUpdateManyWithoutBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
+  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
+  upsert?: Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput[]
+  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
+  set?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  disconnect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  delete?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  update?: Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput[]
+  updateMany?: Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput | Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput[]
+  deleteMany?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
 }
 
-export type BookingItemCreateManyBookingInputEnvelope = {
-  data: Prisma.BookingItemCreateManyBookingInput | Prisma.BookingItemCreateManyBookingInput[]
-  skipDuplicates?: boolean
-}
-
-export type BookingItemUpsertWithWhereUniqueWithoutBookingInput = {
-  where: Prisma.BookingItemWhereUniqueInput
-  update: Prisma.XOR<Prisma.BookingItemUpdateWithoutBookingInput, Prisma.BookingItemUncheckedUpdateWithoutBookingInput>
-  create: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput>
-}
-
-export type BookingItemUpdateWithWhereUniqueWithoutBookingInput = {
-  where: Prisma.BookingItemWhereUniqueInput
-  data: Prisma.XOR<Prisma.BookingItemUpdateWithoutBookingInput, Prisma.BookingItemUncheckedUpdateWithoutBookingInput>
-}
-
-export type BookingItemUpdateManyWithWhereWithoutBookingInput = {
-  where: Prisma.BookingItemScalarWhereInput
-  data: Prisma.XOR<Prisma.BookingItemUpdateManyMutationInput, Prisma.BookingItemUncheckedUpdateManyWithoutBookingInput>
-}
-
-export type BookingItemScalarWhereInput = {
-  AND?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
-  OR?: Prisma.BookingItemScalarWhereInput[]
-  NOT?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
-  id?: Prisma.IntFilter<"BookingItem"> | number
-  bookingId?: Prisma.IntFilter<"BookingItem"> | number
-  serviceId?: Prisma.IntFilter<"BookingItem"> | number
-  serviceName?: Prisma.StringFilter<"BookingItem"> | string
-  serviceImage?: Prisma.StringNullableFilter<"BookingItem"> | string | null
-  quantity?: Prisma.IntFilter<"BookingItem"> | number
-  unitPrice?: Prisma.DecimalFilter<"BookingItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  discountPrice?: Prisma.DecimalNullableFilter<"BookingItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice?: Prisma.DecimalFilter<"BookingItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  durationMinutes?: Prisma.IntNullableFilter<"BookingItem"> | number | null
-  createdAt?: Prisma.DateTimeFilter<"BookingItem"> | Date | string
+export type BookingItemUncheckedUpdateManyWithoutBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput> | Prisma.BookingItemCreateWithoutBookingInput[] | Prisma.BookingItemUncheckedCreateWithoutBookingInput[]
+  connectOrCreate?: Prisma.BookingItemCreateOrConnectWithoutBookingInput | Prisma.BookingItemCreateOrConnectWithoutBookingInput[]
+  upsert?: Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpsertWithWhereUniqueWithoutBookingInput[]
+  createMany?: Prisma.BookingItemCreateManyBookingInputEnvelope
+  set?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  disconnect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  delete?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  connect?: Prisma.BookingItemWhereUniqueInput | Prisma.BookingItemWhereUniqueInput[]
+  update?: Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput | Prisma.BookingItemUpdateWithWhereUniqueWithoutBookingInput[]
+  updateMany?: Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput | Prisma.BookingItemUpdateManyWithWhereWithoutBookingInput[]
+  deleteMany?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
 }
 
 export type BookingItemCreateWithoutServiceInput = {
@@ -757,7 +669,36 @@ export type BookingItemUpdateManyWithWhereWithoutServiceInput = {
   data: Prisma.XOR<Prisma.BookingItemUpdateManyMutationInput, Prisma.BookingItemUncheckedUpdateManyWithoutServiceInput>
 }
 
-export type BookingItemCreateManyBookingInput = {
+export type BookingItemScalarWhereInput = {
+  AND?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
+  OR?: Prisma.BookingItemScalarWhereInput[]
+  NOT?: Prisma.BookingItemScalarWhereInput | Prisma.BookingItemScalarWhereInput[]
+  id?: Prisma.IntFilter<"BookingItem"> | number
+  bookingId?: Prisma.IntFilter<"BookingItem"> | number
+  serviceId?: Prisma.IntFilter<"BookingItem"> | number
+  serviceName?: Prisma.StringFilter<"BookingItem"> | string
+  serviceImage?: Prisma.StringNullableFilter<"BookingItem"> | string | null
+  quantity?: Prisma.IntFilter<"BookingItem"> | number
+  unitPrice?: Prisma.DecimalFilter<"BookingItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.DecimalNullableFilter<"BookingItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.DecimalFilter<"BookingItem"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  durationMinutes?: Prisma.IntNullableFilter<"BookingItem"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"BookingItem"> | Date | string
+}
+
+export type BookingItemCreateWithoutBookingInput = {
+  serviceName: string
+  serviceImage?: string | null
+  quantity?: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  durationMinutes?: number | null
+  createdAt?: Date | string
+  service: Prisma.ServiceCreateNestedOneWithoutBookingItemsInput
+}
+
+export type BookingItemUncheckedCreateWithoutBookingInput = {
   id?: number
   serviceId: number
   serviceName: string
@@ -770,42 +711,30 @@ export type BookingItemCreateManyBookingInput = {
   createdAt?: Date | string
 }
 
-export type BookingItemUpdateWithoutBookingInput = {
-  serviceName?: Prisma.StringFieldUpdateOperationsInput | string
-  serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  service?: Prisma.ServiceUpdateOneRequiredWithoutBookingItemsNestedInput
+export type BookingItemCreateOrConnectWithoutBookingInput = {
+  where: Prisma.BookingItemWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput>
 }
 
-export type BookingItemUncheckedUpdateWithoutBookingInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
-  serviceName?: Prisma.StringFieldUpdateOperationsInput | string
-  serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type BookingItemCreateManyBookingInputEnvelope = {
+  data: Prisma.BookingItemCreateManyBookingInput | Prisma.BookingItemCreateManyBookingInput[]
+  skipDuplicates?: boolean
 }
 
-export type BookingItemUncheckedUpdateManyWithoutBookingInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
-  serviceName?: Prisma.StringFieldUpdateOperationsInput | string
-  serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  quantity?: Prisma.IntFieldUpdateOperationsInput | number
-  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type BookingItemUpsertWithWhereUniqueWithoutBookingInput = {
+  where: Prisma.BookingItemWhereUniqueInput
+  update: Prisma.XOR<Prisma.BookingItemUpdateWithoutBookingInput, Prisma.BookingItemUncheckedUpdateWithoutBookingInput>
+  create: Prisma.XOR<Prisma.BookingItemCreateWithoutBookingInput, Prisma.BookingItemUncheckedCreateWithoutBookingInput>
+}
+
+export type BookingItemUpdateWithWhereUniqueWithoutBookingInput = {
+  where: Prisma.BookingItemWhereUniqueInput
+  data: Prisma.XOR<Prisma.BookingItemUpdateWithoutBookingInput, Prisma.BookingItemUncheckedUpdateWithoutBookingInput>
+}
+
+export type BookingItemUpdateManyWithWhereWithoutBookingInput = {
+  where: Prisma.BookingItemScalarWhereInput
+  data: Prisma.XOR<Prisma.BookingItemUpdateManyMutationInput, Prisma.BookingItemUncheckedUpdateManyWithoutBookingInput>
 }
 
 export type BookingItemCreateManyServiceInput = {
@@ -849,6 +778,57 @@ export type BookingItemUncheckedUpdateWithoutServiceInput = {
 export type BookingItemUncheckedUpdateManyWithoutServiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   bookingId?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceName?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BookingItemCreateManyBookingInput = {
+  id?: number
+  serviceId: number
+  serviceName: string
+  serviceImage?: string | null
+  quantity?: number
+  unitPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  durationMinutes?: number | null
+  createdAt?: Date | string
+}
+
+export type BookingItemUpdateWithoutBookingInput = {
+  serviceName?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  service?: Prisma.ServiceUpdateOneRequiredWithoutBookingItemsNestedInput
+}
+
+export type BookingItemUncheckedUpdateWithoutBookingInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceName?: Prisma.StringFieldUpdateOperationsInput | string
+  serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  unitPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  discountPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  durationMinutes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BookingItemUncheckedUpdateManyWithoutBookingInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
   serviceName?: Prisma.StringFieldUpdateOperationsInput | string
   serviceImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quantity?: Prisma.IntFieldUpdateOperationsInput | number

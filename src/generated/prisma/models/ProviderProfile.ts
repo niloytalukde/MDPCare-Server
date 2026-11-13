@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ProviderProfile
- * 
+ * The work profile of an individual provider: approval, online status, location and stats.
  */
 export type ProviderProfileModel = runtime.Types.Result.DefaultSelection<Prisma.$ProviderProfilePayload>
 
@@ -60,6 +60,11 @@ export type ProviderProfileMinAggregateOutputType = {
   displayName: string | null
   bio: string | null
   experienceYears: number | null
+  profession: string | null
+  address: string | null
+  city: string | null
+  state: string | null
+  pincode: string | null
   status: $Enums.ProviderStatus | null
   verificationStatus: $Enums.ProviderVerificationStatus | null
   rejectionReason: string | null
@@ -87,6 +92,11 @@ export type ProviderProfileMaxAggregateOutputType = {
   displayName: string | null
   bio: string | null
   experienceYears: number | null
+  profession: string | null
+  address: string | null
+  city: string | null
+  state: string | null
+  pincode: string | null
   status: $Enums.ProviderStatus | null
   verificationStatus: $Enums.ProviderVerificationStatus | null
   rejectionReason: string | null
@@ -114,6 +124,11 @@ export type ProviderProfileCountAggregateOutputType = {
   displayName: number
   bio: number
   experienceYears: number
+  profession: number
+  address: number
+  city: number
+  state: number
+  pincode: number
   status: number
   verificationStatus: number
   rejectionReason: number
@@ -171,6 +186,11 @@ export type ProviderProfileMinAggregateInputType = {
   displayName?: true
   bio?: true
   experienceYears?: true
+  profession?: true
+  address?: true
+  city?: true
+  state?: true
+  pincode?: true
   status?: true
   verificationStatus?: true
   rejectionReason?: true
@@ -198,6 +218,11 @@ export type ProviderProfileMaxAggregateInputType = {
   displayName?: true
   bio?: true
   experienceYears?: true
+  profession?: true
+  address?: true
+  city?: true
+  state?: true
+  pincode?: true
   status?: true
   verificationStatus?: true
   rejectionReason?: true
@@ -225,6 +250,11 @@ export type ProviderProfileCountAggregateInputType = {
   displayName?: true
   bio?: true
   experienceYears?: true
+  profession?: true
+  address?: true
+  city?: true
+  state?: true
+  pincode?: true
   status?: true
   verificationStatus?: true
   rejectionReason?: true
@@ -339,6 +369,11 @@ export type ProviderProfileGroupByOutputType = {
   displayName: string | null
   bio: string | null
   experienceYears: number
+  profession: string | null
+  address: string | null
+  city: string | null
+  state: string | null
+  pincode: string | null
   status: $Enums.ProviderStatus
   verificationStatus: $Enums.ProviderVerificationStatus
   rejectionReason: string | null
@@ -389,6 +424,11 @@ export type ProviderProfileWhereInput = {
   displayName?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   bio?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   experienceYears?: Prisma.IntFilter<"ProviderProfile"> | number
+  profession?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  address?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  city?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  state?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  pincode?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   status?: Prisma.EnumProviderStatusFilter<"ProviderProfile"> | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFilter<"ProviderProfile"> | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
@@ -409,11 +449,13 @@ export type ProviderProfileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"ProviderProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProviderProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  wallet?: Prisma.XOR<Prisma.ProviderWalletNullableScalarRelationFilter, Prisma.ProviderWalletWhereInput> | null
   services?: Prisma.ProviderServiceListRelationFilter
   documents?: Prisma.ProviderDocumentListRelationFilter
   availability?: Prisma.ProviderAvailabilityListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
   bookingRequests?: Prisma.BookingProviderListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }
 
 export type ProviderProfileOrderByWithRelationInput = {
@@ -422,6 +464,11 @@ export type ProviderProfileOrderByWithRelationInput = {
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   experienceYears?: Prisma.SortOrder
+  profession?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  state?: Prisma.SortOrderInput | Prisma.SortOrder
+  pincode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -442,11 +489,13 @@ export type ProviderProfileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  wallet?: Prisma.ProviderWalletOrderByWithRelationInput
   services?: Prisma.ProviderServiceOrderByRelationAggregateInput
   documents?: Prisma.ProviderDocumentOrderByRelationAggregateInput
   availability?: Prisma.ProviderAvailabilityOrderByRelationAggregateInput
   bookings?: Prisma.BookingOrderByRelationAggregateInput
   bookingRequests?: Prisma.BookingProviderOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput
 }
 
 export type ProviderProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -458,6 +507,11 @@ export type ProviderProfileWhereUniqueInput = Prisma.AtLeast<{
   displayName?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   bio?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   experienceYears?: Prisma.IntFilter<"ProviderProfile"> | number
+  profession?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  address?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  city?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  state?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
+  pincode?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
   status?: Prisma.EnumProviderStatusFilter<"ProviderProfile"> | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFilter<"ProviderProfile"> | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.StringNullableFilter<"ProviderProfile"> | string | null
@@ -478,11 +532,13 @@ export type ProviderProfileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ProviderProfile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ProviderProfile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  wallet?: Prisma.XOR<Prisma.ProviderWalletNullableScalarRelationFilter, Prisma.ProviderWalletWhereInput> | null
   services?: Prisma.ProviderServiceListRelationFilter
   documents?: Prisma.ProviderDocumentListRelationFilter
   availability?: Prisma.ProviderAvailabilityListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
   bookingRequests?: Prisma.BookingProviderListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }, "id" | "userId">
 
 export type ProviderProfileOrderByWithAggregationInput = {
@@ -491,6 +547,11 @@ export type ProviderProfileOrderByWithAggregationInput = {
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   experienceYears?: Prisma.SortOrder
+  profession?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  state?: Prisma.SortOrderInput | Prisma.SortOrder
+  pincode?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -526,6 +587,11 @@ export type ProviderProfileScalarWhereWithAggregatesInput = {
   displayName?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
   experienceYears?: Prisma.IntWithAggregatesFilter<"ProviderProfile"> | number
+  profession?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
+  state?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
+  pincode?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
   status?: Prisma.EnumProviderStatusWithAggregatesFilter<"ProviderProfile"> | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusWithAggregatesFilter<"ProviderProfile"> | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"ProviderProfile"> | string | null
@@ -551,6 +617,11 @@ export type ProviderProfileCreateInput = {
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -571,11 +642,13 @@ export type ProviderProfileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
   services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
   documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
   availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
   bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
   bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderProfileUncheckedCreateInput = {
@@ -584,6 +657,11 @@ export type ProviderProfileUncheckedCreateInput = {
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -603,17 +681,24 @@ export type ProviderProfileUncheckedCreateInput = {
   bankAccountVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
   services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
   documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
   availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
   bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderProfileUpdateInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -634,11 +719,13 @@ export type ProviderProfileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
   services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
   documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
   availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
   bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderProfileUncheckedUpdateInput = {
@@ -647,6 +734,11 @@ export type ProviderProfileUncheckedUpdateInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -666,11 +758,13 @@ export type ProviderProfileUncheckedUpdateInput = {
   bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
   services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
   documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
   availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
   bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderProfileCreateManyInput = {
@@ -679,6 +773,11 @@ export type ProviderProfileCreateManyInput = {
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -704,6 +803,11 @@ export type ProviderProfileUpdateManyMutationInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -731,6 +835,11 @@ export type ProviderProfileUncheckedUpdateManyInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -757,17 +866,17 @@ export type ProviderProfileScalarRelationFilter = {
   isNot?: Prisma.ProviderProfileWhereInput
 }
 
-export type ProviderProfileNullableScalarRelationFilter = {
-  is?: Prisma.ProviderProfileWhereInput | null
-  isNot?: Prisma.ProviderProfileWhereInput | null
-}
-
 export type ProviderProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   experienceYears?: Prisma.SortOrder
+  profession?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrder
@@ -809,6 +918,11 @@ export type ProviderProfileMaxOrderByAggregateInput = {
   displayName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   experienceYears?: Prisma.SortOrder
+  profession?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrder
@@ -836,6 +950,11 @@ export type ProviderProfileMinOrderByAggregateInput = {
   displayName?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   experienceYears?: Prisma.SortOrder
+  profession?: Prisma.SortOrder
+  address?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  state?: Prisma.SortOrder
+  pincode?: Prisma.SortOrder
   status?: Prisma.SortOrder
   verificationStatus?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrder
@@ -871,6 +990,77 @@ export type ProviderProfileSumOrderByAggregateInput = {
   cancelledBookings?: Prisma.SortOrder
 }
 
+export type ProviderProfileNullableScalarRelationFilter = {
+  is?: Prisma.ProviderProfileWhereInput | null
+  isNot?: Prisma.ProviderProfileWhereInput | null
+}
+
+export type ProviderProfileCreateNestedOneWithoutAvailabilityInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutAvailabilityInput, Prisma.ProviderProfileUncheckedCreateWithoutAvailabilityInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutAvailabilityInput
+  connect?: Prisma.ProviderProfileWhereUniqueInput
+}
+
+export type ProviderProfileUpdateOneRequiredWithoutAvailabilityNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutAvailabilityInput, Prisma.ProviderProfileUncheckedCreateWithoutAvailabilityInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutAvailabilityInput
+  upsert?: Prisma.ProviderProfileUpsertWithoutAvailabilityInput
+  connect?: Prisma.ProviderProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutAvailabilityInput, Prisma.ProviderProfileUpdateWithoutAvailabilityInput>, Prisma.ProviderProfileUncheckedUpdateWithoutAvailabilityInput>
+}
+
+export type ProviderProfileCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.ProviderProfileWhereUniqueInput
+}
+
+export type ProviderProfileUpdateOneRequiredWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.ProviderProfileUpsertWithoutDocumentsInput
+  connect?: Prisma.ProviderProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutDocumentsInput, Prisma.ProviderProfileUpdateWithoutDocumentsInput>, Prisma.ProviderProfileUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type EnumProviderStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ProviderStatus
+}
+
+export type EnumProviderAvailabilityStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ProviderAvailabilityStatus
+}
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type ProviderProfileCreateNestedOneWithoutServicesInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutServicesInput
+  connect?: Prisma.ProviderProfileWhereUniqueInput
+}
+
+export type ProviderProfileUpdateOneRequiredWithoutServicesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutServicesInput
+  upsert?: Prisma.ProviderProfileUpsertWithoutServicesInput
+  connect?: Prisma.ProviderProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutServicesInput, Prisma.ProviderProfileUpdateWithoutServicesInput>, Prisma.ProviderProfileUncheckedUpdateWithoutServicesInput>
+}
+
 export type ProviderProfileCreateNestedOneWithoutBookingRequestsInput = {
   create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingRequestsInput>
   connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutBookingRequestsInput
@@ -901,62 +1091,34 @@ export type ProviderProfileUpdateOneWithoutBookingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutBookingsInput, Prisma.ProviderProfileUpdateWithoutBookingsInput>, Prisma.ProviderProfileUncheckedUpdateWithoutBookingsInput>
 }
 
-export type EnumProviderStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ProviderStatus
-}
-
-export type EnumProviderVerificationStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ProviderVerificationStatus
-}
-
-export type EnumProviderAvailabilityStatusFieldUpdateOperationsInput = {
-  set?: $Enums.ProviderAvailabilityStatus
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
-export type ProviderProfileCreateNestedOneWithoutServicesInput = {
-  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
-  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutServicesInput
+export type ProviderProfileCreateNestedOneWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutReviewsInput, Prisma.ProviderProfileUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutReviewsInput
   connect?: Prisma.ProviderProfileWhereUniqueInput
 }
 
-export type ProviderProfileUpdateOneRequiredWithoutServicesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
-  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutServicesInput
-  upsert?: Prisma.ProviderProfileUpsertWithoutServicesInput
+export type ProviderProfileUpdateOneWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutReviewsInput, Prisma.ProviderProfileUncheckedCreateWithoutReviewsInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutReviewsInput
+  upsert?: Prisma.ProviderProfileUpsertWithoutReviewsInput
+  disconnect?: Prisma.ProviderProfileWhereInput | boolean
+  delete?: Prisma.ProviderProfileWhereInput | boolean
   connect?: Prisma.ProviderProfileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutServicesInput, Prisma.ProviderProfileUpdateWithoutServicesInput>, Prisma.ProviderProfileUncheckedUpdateWithoutServicesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutReviewsInput, Prisma.ProviderProfileUpdateWithoutReviewsInput>, Prisma.ProviderProfileUncheckedUpdateWithoutReviewsInput>
 }
 
-export type ProviderProfileCreateNestedOneWithoutDocumentsInput = {
-  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
-  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutDocumentsInput
-  connect?: Prisma.ProviderProfileWhereUniqueInput
-}
-
-export type ProviderProfileUpdateOneRequiredWithoutDocumentsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
-  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutDocumentsInput
-  upsert?: Prisma.ProviderProfileUpsertWithoutDocumentsInput
-  connect?: Prisma.ProviderProfileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutDocumentsInput, Prisma.ProviderProfileUpdateWithoutDocumentsInput>, Prisma.ProviderProfileUncheckedUpdateWithoutDocumentsInput>
-}
-
-export type ProviderProfileCreateNestedOneWithoutAvailabilityInput = {
-  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutAvailabilityInput, Prisma.ProviderProfileUncheckedCreateWithoutAvailabilityInput>
-  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutAvailabilityInput
+export type ProviderProfileCreateNestedOneWithoutWalletInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutWalletInput, Prisma.ProviderProfileUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutWalletInput
   connect?: Prisma.ProviderProfileWhereUniqueInput
 }
 
-export type ProviderProfileUpdateOneRequiredWithoutAvailabilityNestedInput = {
-  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutAvailabilityInput, Prisma.ProviderProfileUncheckedCreateWithoutAvailabilityInput>
-  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutAvailabilityInput
-  upsert?: Prisma.ProviderProfileUpsertWithoutAvailabilityInput
+export type ProviderProfileUpdateOneRequiredWithoutWalletNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderProfileCreateWithoutWalletInput, Prisma.ProviderProfileUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.ProviderProfileCreateOrConnectWithoutWalletInput
+  upsert?: Prisma.ProviderProfileUpsertWithoutWalletInput
   connect?: Prisma.ProviderProfileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutAvailabilityInput, Prisma.ProviderProfileUpdateWithoutAvailabilityInput>, Prisma.ProviderProfileUncheckedUpdateWithoutAvailabilityInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutWalletInput, Prisma.ProviderProfileUpdateWithoutWalletInput>, Prisma.ProviderProfileUncheckedUpdateWithoutWalletInput>
 }
 
 export type ProviderProfileCreateNestedOneWithoutUserInput = {
@@ -991,562 +1153,15 @@ export type ProviderProfileUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProviderProfileUpdateToOneWithWhereWithoutUserInput, Prisma.ProviderProfileUpdateWithoutUserInput>, Prisma.ProviderProfileUncheckedUpdateWithoutUserInput>
 }
 
-export type ProviderProfileCreateWithoutBookingRequestsInput = {
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
-  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
-  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
-  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileUncheckedCreateWithoutBookingRequestsInput = {
-  id?: number
-  userId: number
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
-  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
-  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileCreateOrConnectWithoutBookingRequestsInput = {
-  where: Prisma.ProviderProfileWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingRequestsInput>
-}
-
-export type ProviderProfileUpsertWithoutBookingRequestsInput = {
-  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingRequestsInput>
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingRequestsInput>
-  where?: Prisma.ProviderProfileWhereInput
-}
-
-export type ProviderProfileUpdateToOneWithWhereWithoutBookingRequestsInput = {
-  where?: Prisma.ProviderProfileWhereInput
-  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingRequestsInput>
-}
-
-export type ProviderProfileUpdateWithoutBookingRequestsInput = {
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
-  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
-  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
-  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileUncheckedUpdateWithoutBookingRequestsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
-  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
-  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileCreateWithoutBookingsInput = {
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
-  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
-  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
-  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileUncheckedCreateWithoutBookingsInput = {
-  id?: number
-  userId: number
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
-  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
-  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileCreateOrConnectWithoutBookingsInput = {
-  where: Prisma.ProviderProfileWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingsInput>
-}
-
-export type ProviderProfileUpsertWithoutBookingsInput = {
-  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingsInput>
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingsInput>
-  where?: Prisma.ProviderProfileWhereInput
-}
-
-export type ProviderProfileUpdateToOneWithWhereWithoutBookingsInput = {
-  where?: Prisma.ProviderProfileWhereInput
-  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingsInput>
-}
-
-export type ProviderProfileUpdateWithoutBookingsInput = {
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
-  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
-  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
-  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileUncheckedUpdateWithoutBookingsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
-  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
-  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileCreateWithoutServicesInput = {
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
-  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
-  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
-  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileUncheckedCreateWithoutServicesInput = {
-  id?: number
-  userId: number
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
-  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
-  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileCreateOrConnectWithoutServicesInput = {
-  where: Prisma.ProviderProfileWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
-}
-
-export type ProviderProfileUpsertWithoutServicesInput = {
-  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutServicesInput, Prisma.ProviderProfileUncheckedUpdateWithoutServicesInput>
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
-  where?: Prisma.ProviderProfileWhereInput
-}
-
-export type ProviderProfileUpdateToOneWithWhereWithoutServicesInput = {
-  where?: Prisma.ProviderProfileWhereInput
-  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutServicesInput, Prisma.ProviderProfileUncheckedUpdateWithoutServicesInput>
-}
-
-export type ProviderProfileUpdateWithoutServicesInput = {
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
-  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
-  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
-  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileUncheckedUpdateWithoutServicesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
-  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
-  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileCreateWithoutDocumentsInput = {
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
-  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
-  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
-  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileUncheckedCreateWithoutDocumentsInput = {
-  id?: number
-  userId: number
-  displayName?: string | null
-  bio?: string | null
-  experienceYears?: number
-  status?: $Enums.ProviderStatus
-  verificationStatus?: $Enums.ProviderVerificationStatus
-  rejectionReason?: string | null
-  verifiedAt?: Date | string | null
-  approvedAt?: Date | string | null
-  availabilityStatus?: $Enums.ProviderAvailabilityStatus
-  isAvailable?: boolean
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Date | string | null
-  serviceRadiusKm?: number
-  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: number
-  totalBookings?: number
-  completedBookings?: number
-  cancelledBookings?: number
-  bankAccountVerified?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
-  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
-  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
-  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
-}
-
-export type ProviderProfileCreateOrConnectWithoutDocumentsInput = {
-  where: Prisma.ProviderProfileWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
-}
-
-export type ProviderProfileUpsertWithoutDocumentsInput = {
-  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedUpdateWithoutDocumentsInput>
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
-  where?: Prisma.ProviderProfileWhereInput
-}
-
-export type ProviderProfileUpdateToOneWithWhereWithoutDocumentsInput = {
-  where?: Prisma.ProviderProfileWhereInput
-  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedUpdateWithoutDocumentsInput>
-}
-
-export type ProviderProfileUpdateWithoutDocumentsInput = {
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
-  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
-  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
-  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
-}
-
-export type ProviderProfileUncheckedUpdateWithoutDocumentsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
-  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
-  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
-  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
-  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
-  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
-  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
-  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
-  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
-  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
-}
-
 export type ProviderProfileCreateWithoutAvailabilityInput = {
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -1567,10 +1182,12 @@ export type ProviderProfileCreateWithoutAvailabilityInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
   services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
   documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
   bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
   bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderProfileUncheckedCreateWithoutAvailabilityInput = {
@@ -1579,6 +1196,11 @@ export type ProviderProfileUncheckedCreateWithoutAvailabilityInput = {
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -1598,10 +1220,12 @@ export type ProviderProfileUncheckedCreateWithoutAvailabilityInput = {
   bankAccountVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
   services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
   documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
   bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
 }
 
 export type ProviderProfileCreateOrConnectWithoutAvailabilityInput = {
@@ -1624,6 +1248,11 @@ export type ProviderProfileUpdateWithoutAvailabilityInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1644,10 +1273,12 @@ export type ProviderProfileUpdateWithoutAvailabilityInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
   services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
   documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
   bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
 }
 
 export type ProviderProfileUncheckedUpdateWithoutAvailabilityInput = {
@@ -1656,6 +1287,11 @@ export type ProviderProfileUncheckedUpdateWithoutAvailabilityInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1675,16 +1311,23 @@ export type ProviderProfileUncheckedUpdateWithoutAvailabilityInput = {
   bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
   services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
   documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
   bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
 }
 
-export type ProviderProfileCreateWithoutUserInput = {
+export type ProviderProfileCreateWithoutDocumentsInput = {
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -1704,6 +1347,672 @@ export type ProviderProfileCreateWithoutUserInput = {
   bankAccountVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileUncheckedCreateWithoutDocumentsInput = {
+  id?: number
+  userId: number
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.ProviderProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
+}
+
+export type ProviderProfileUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.ProviderProfileWhereInput
+}
+
+export type ProviderProfileUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.ProviderProfileWhereInput
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutDocumentsInput, Prisma.ProviderProfileUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type ProviderProfileUpdateWithoutDocumentsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileCreateWithoutServicesInput = {
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
+  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileUncheckedCreateWithoutServicesInput = {
+  id?: number
+  userId: number
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
+  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileCreateOrConnectWithoutServicesInput = {
+  where: Prisma.ProviderProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
+}
+
+export type ProviderProfileUpsertWithoutServicesInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutServicesInput, Prisma.ProviderProfileUncheckedUpdateWithoutServicesInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutServicesInput, Prisma.ProviderProfileUncheckedCreateWithoutServicesInput>
+  where?: Prisma.ProviderProfileWhereInput
+}
+
+export type ProviderProfileUpdateToOneWithWhereWithoutServicesInput = {
+  where?: Prisma.ProviderProfileWhereInput
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutServicesInput, Prisma.ProviderProfileUncheckedUpdateWithoutServicesInput>
+}
+
+export type ProviderProfileUpdateWithoutServicesInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileUncheckedUpdateWithoutServicesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileCreateWithoutBookingRequestsInput = {
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileUncheckedCreateWithoutBookingRequestsInput = {
+  id?: number
+  userId: number
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileCreateOrConnectWithoutBookingRequestsInput = {
+  where: Prisma.ProviderProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingRequestsInput>
+}
+
+export type ProviderProfileUpsertWithoutBookingRequestsInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingRequestsInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingRequestsInput>
+  where?: Prisma.ProviderProfileWhereInput
+}
+
+export type ProviderProfileUpdateToOneWithWhereWithoutBookingRequestsInput = {
+  where?: Prisma.ProviderProfileWhereInput
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingRequestsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingRequestsInput>
+}
+
+export type ProviderProfileUpdateWithoutBookingRequestsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileUncheckedUpdateWithoutBookingRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileCreateWithoutBookingsInput = {
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileUncheckedCreateWithoutBookingsInput = {
+  id?: number
+  userId: number
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileCreateOrConnectWithoutBookingsInput = {
+  where: Prisma.ProviderProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingsInput>
+}
+
+export type ProviderProfileUpsertWithoutBookingsInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingsInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutBookingsInput, Prisma.ProviderProfileUncheckedCreateWithoutBookingsInput>
+  where?: Prisma.ProviderProfileWhereInput
+}
+
+export type ProviderProfileUpdateToOneWithWhereWithoutBookingsInput = {
+  where?: Prisma.ProviderProfileWhereInput
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutBookingsInput, Prisma.ProviderProfileUncheckedUpdateWithoutBookingsInput>
+}
+
+export type ProviderProfileUpdateWithoutBookingsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileUncheckedUpdateWithoutBookingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileCreateWithoutReviewsInput = {
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
   services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
   documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
   availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
@@ -1711,11 +2020,183 @@ export type ProviderProfileCreateWithoutUserInput = {
   bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
 }
 
-export type ProviderProfileUncheckedCreateWithoutUserInput = {
+export type ProviderProfileUncheckedCreateWithoutReviewsInput = {
   id?: number
+  userId: number
   displayName?: string | null
   bio?: string | null
   experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.ProviderProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutReviewsInput, Prisma.ProviderProfileUncheckedCreateWithoutReviewsInput>
+}
+
+export type ProviderProfileUpsertWithoutReviewsInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutReviewsInput, Prisma.ProviderProfileUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutReviewsInput, Prisma.ProviderProfileUncheckedCreateWithoutReviewsInput>
+  where?: Prisma.ProviderProfileWhereInput
+}
+
+export type ProviderProfileUpdateToOneWithWhereWithoutReviewsInput = {
+  where?: Prisma.ProviderProfileWhereInput
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutReviewsInput, Prisma.ProviderProfileUncheckedUpdateWithoutReviewsInput>
+}
+
+export type ProviderProfileUpdateWithoutReviewsInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileCreateWithoutWalletInput = {
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProviderProfileInput
+  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileUncheckedCreateWithoutWalletInput = {
+  id?: number
+  userId: number
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
   status?: $Enums.ProviderStatus
   verificationStatus?: $Enums.ProviderVerificationStatus
   rejectionReason?: string | null
@@ -1740,28 +2221,34 @@ export type ProviderProfileUncheckedCreateWithoutUserInput = {
   availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
   bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
 }
 
-export type ProviderProfileCreateOrConnectWithoutUserInput = {
+export type ProviderProfileCreateOrConnectWithoutWalletInput = {
   where: Prisma.ProviderProfileWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutUserInput, Prisma.ProviderProfileUncheckedCreateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutWalletInput, Prisma.ProviderProfileUncheckedCreateWithoutWalletInput>
 }
 
-export type ProviderProfileUpsertWithoutUserInput = {
-  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutUserInput, Prisma.ProviderProfileUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutUserInput, Prisma.ProviderProfileUncheckedCreateWithoutUserInput>
+export type ProviderProfileUpsertWithoutWalletInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutWalletInput, Prisma.ProviderProfileUncheckedUpdateWithoutWalletInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutWalletInput, Prisma.ProviderProfileUncheckedCreateWithoutWalletInput>
   where?: Prisma.ProviderProfileWhereInput
 }
 
-export type ProviderProfileUpdateToOneWithWhereWithoutUserInput = {
+export type ProviderProfileUpdateToOneWithWhereWithoutWalletInput = {
   where?: Prisma.ProviderProfileWhereInput
-  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutUserInput, Prisma.ProviderProfileUncheckedUpdateWithoutUserInput>
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutWalletInput, Prisma.ProviderProfileUncheckedUpdateWithoutWalletInput>
 }
 
-export type ProviderProfileUpdateWithoutUserInput = {
+export type ProviderProfileUpdateWithoutWalletInput = {
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1781,18 +2268,26 @@ export type ProviderProfileUpdateWithoutUserInput = {
   bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProviderProfileNestedInput
   services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
   documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
   availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
   bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
 }
 
-export type ProviderProfileUncheckedUpdateWithoutUserInput = {
+export type ProviderProfileUncheckedUpdateWithoutWalletInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
   verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1817,6 +2312,173 @@ export type ProviderProfileUncheckedUpdateWithoutUserInput = {
   availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
   bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileCreateWithoutUserInput = {
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileUncheckedCreateWithoutUserInput = {
+  id?: number
+  displayName?: string | null
+  bio?: string | null
+  experienceYears?: number
+  profession?: string | null
+  address?: string | null
+  city?: string | null
+  state?: string | null
+  pincode?: string | null
+  status?: $Enums.ProviderStatus
+  verificationStatus?: $Enums.ProviderVerificationStatus
+  rejectionReason?: string | null
+  verifiedAt?: Date | string | null
+  approvedAt?: Date | string | null
+  availabilityStatus?: $Enums.ProviderAvailabilityStatus
+  isAvailable?: boolean
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Date | string | null
+  serviceRadiusKm?: number
+  averageRating?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: number
+  totalBookings?: number
+  completedBookings?: number
+  cancelledBookings?: number
+  bankAccountVerified?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  wallet?: Prisma.ProviderWalletUncheckedCreateNestedOneWithoutProviderInput
+  services?: Prisma.ProviderServiceUncheckedCreateNestedManyWithoutProviderInput
+  documents?: Prisma.ProviderDocumentUncheckedCreateNestedManyWithoutProviderInput
+  availability?: Prisma.ProviderAvailabilityUncheckedCreateNestedManyWithoutProviderInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutProviderInput
+  bookingRequests?: Prisma.BookingProviderUncheckedCreateNestedManyWithoutProviderInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutProviderInput
+}
+
+export type ProviderProfileCreateOrConnectWithoutUserInput = {
+  where: Prisma.ProviderProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutUserInput, Prisma.ProviderProfileUncheckedCreateWithoutUserInput>
+}
+
+export type ProviderProfileUpsertWithoutUserInput = {
+  update: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutUserInput, Prisma.ProviderProfileUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ProviderProfileCreateWithoutUserInput, Prisma.ProviderProfileUncheckedCreateWithoutUserInput>
+  where?: Prisma.ProviderProfileWhereInput
+}
+
+export type ProviderProfileUpdateToOneWithWhereWithoutUserInput = {
+  where?: Prisma.ProviderProfileWhereInput
+  data: Prisma.XOR<Prisma.ProviderProfileUpdateWithoutUserInput, Prisma.ProviderProfileUncheckedUpdateWithoutUserInput>
+}
+
+export type ProviderProfileUpdateWithoutUserInput = {
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutProviderNestedInput
+}
+
+export type ProviderProfileUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  experienceYears?: Prisma.IntFieldUpdateOperationsInput | number
+  profession?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  state?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProviderStatusFieldUpdateOperationsInput | $Enums.ProviderStatus
+  verificationStatus?: Prisma.EnumProviderVerificationStatusFieldUpdateOperationsInput | $Enums.ProviderVerificationStatus
+  rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  approvedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  availabilityStatus?: Prisma.EnumProviderAvailabilityStatusFieldUpdateOperationsInput | $Enums.ProviderAvailabilityStatus
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  serviceRadiusKm?: Prisma.IntFieldUpdateOperationsInput | number
+  averageRating?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  totalReviews?: Prisma.IntFieldUpdateOperationsInput | number
+  totalBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  completedBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  cancelledBookings?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccountVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  wallet?: Prisma.ProviderWalletUncheckedUpdateOneWithoutProviderNestedInput
+  services?: Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput
+  documents?: Prisma.ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput
+  availability?: Prisma.ProviderAvailabilityUncheckedUpdateManyWithoutProviderNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutProviderNestedInput
+  bookingRequests?: Prisma.BookingProviderUncheckedUpdateManyWithoutProviderNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutProviderNestedInput
 }
 
 
@@ -1830,6 +2492,7 @@ export type ProviderProfileCountOutputType = {
   availability: number
   bookings: number
   bookingRequests: number
+  reviews: number
 }
 
 export type ProviderProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1838,6 +2501,7 @@ export type ProviderProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.E
   availability?: boolean | ProviderProfileCountOutputTypeCountAvailabilityArgs
   bookings?: boolean | ProviderProfileCountOutputTypeCountBookingsArgs
   bookingRequests?: boolean | ProviderProfileCountOutputTypeCountBookingRequestsArgs
+  reviews?: boolean | ProviderProfileCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -1885,6 +2549,13 @@ export type ProviderProfileCountOutputTypeCountBookingRequestsArgs<ExtArgs exten
   where?: Prisma.BookingProviderWhereInput
 }
 
+/**
+ * ProviderProfileCountOutputType without action
+ */
+export type ProviderProfileCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewWhereInput
+}
+
 
 export type ProviderProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1892,6 +2563,11 @@ export type ProviderProfileSelect<ExtArgs extends runtime.Types.Extensions.Inter
   displayName?: boolean
   bio?: boolean
   experienceYears?: boolean
+  profession?: boolean
+  address?: boolean
+  city?: boolean
+  state?: boolean
+  pincode?: boolean
   status?: boolean
   verificationStatus?: boolean
   rejectionReason?: boolean
@@ -1912,11 +2588,13 @@ export type ProviderProfileSelect<ExtArgs extends runtime.Types.Extensions.Inter
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  wallet?: boolean | Prisma.ProviderProfile$walletArgs<ExtArgs>
   services?: boolean | Prisma.ProviderProfile$servicesArgs<ExtArgs>
   documents?: boolean | Prisma.ProviderProfile$documentsArgs<ExtArgs>
   availability?: boolean | Prisma.ProviderProfile$availabilityArgs<ExtArgs>
   bookings?: boolean | Prisma.ProviderProfile$bookingsArgs<ExtArgs>
   bookingRequests?: boolean | Prisma.ProviderProfile$bookingRequestsArgs<ExtArgs>
+  reviews?: boolean | Prisma.ProviderProfile$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.ProviderProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["providerProfile"]>
 
@@ -1926,6 +2604,11 @@ export type ProviderProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   displayName?: boolean
   bio?: boolean
   experienceYears?: boolean
+  profession?: boolean
+  address?: boolean
+  city?: boolean
+  state?: boolean
+  pincode?: boolean
   status?: boolean
   verificationStatus?: boolean
   rejectionReason?: boolean
@@ -1954,6 +2637,11 @@ export type ProviderProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   displayName?: boolean
   bio?: boolean
   experienceYears?: boolean
+  profession?: boolean
+  address?: boolean
+  city?: boolean
+  state?: boolean
+  pincode?: boolean
   status?: boolean
   verificationStatus?: boolean
   rejectionReason?: boolean
@@ -1982,6 +2670,11 @@ export type ProviderProfileSelectScalar = {
   displayName?: boolean
   bio?: boolean
   experienceYears?: boolean
+  profession?: boolean
+  address?: boolean
+  city?: boolean
+  state?: boolean
+  pincode?: boolean
   status?: boolean
   verificationStatus?: boolean
   rejectionReason?: boolean
@@ -2003,14 +2696,16 @@ export type ProviderProfileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProviderProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "displayName" | "bio" | "experienceYears" | "status" | "verificationStatus" | "rejectionReason" | "verifiedAt" | "approvedAt" | "availabilityStatus" | "isAvailable" | "latitude" | "longitude" | "locationUpdatedAt" | "serviceRadiusKm" | "averageRating" | "totalReviews" | "totalBookings" | "completedBookings" | "cancelledBookings" | "bankAccountVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["providerProfile"]>
+export type ProviderProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "displayName" | "bio" | "experienceYears" | "profession" | "address" | "city" | "state" | "pincode" | "status" | "verificationStatus" | "rejectionReason" | "verifiedAt" | "approvedAt" | "availabilityStatus" | "isAvailable" | "latitude" | "longitude" | "locationUpdatedAt" | "serviceRadiusKm" | "averageRating" | "totalReviews" | "totalBookings" | "completedBookings" | "cancelledBookings" | "bankAccountVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["providerProfile"]>
 export type ProviderProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  wallet?: boolean | Prisma.ProviderProfile$walletArgs<ExtArgs>
   services?: boolean | Prisma.ProviderProfile$servicesArgs<ExtArgs>
   documents?: boolean | Prisma.ProviderProfile$documentsArgs<ExtArgs>
   availability?: boolean | Prisma.ProviderProfile$availabilityArgs<ExtArgs>
   bookings?: boolean | Prisma.ProviderProfile$bookingsArgs<ExtArgs>
   bookingRequests?: boolean | Prisma.ProviderProfile$bookingRequestsArgs<ExtArgs>
+  reviews?: boolean | Prisma.ProviderProfile$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.ProviderProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProviderProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2024,11 +2719,13 @@ export type $ProviderProfilePayload<ExtArgs extends runtime.Types.Extensions.Int
   name: "ProviderProfile"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    wallet: Prisma.$ProviderWalletPayload<ExtArgs> | null
     services: Prisma.$ProviderServicePayload<ExtArgs>[]
     documents: Prisma.$ProviderDocumentPayload<ExtArgs>[]
     availability: Prisma.$ProviderAvailabilityPayload<ExtArgs>[]
     bookings: Prisma.$BookingPayload<ExtArgs>[]
     bookingRequests: Prisma.$BookingProviderPayload<ExtArgs>[]
+    reviews: Prisma.$ReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2036,6 +2733,11 @@ export type $ProviderProfilePayload<ExtArgs extends runtime.Types.Extensions.Int
     displayName: string | null
     bio: string | null
     experienceYears: number
+    profession: string | null
+    address: string | null
+    city: string | null
+    state: string | null
+    pincode: string | null
     status: $Enums.ProviderStatus
     verificationStatus: $Enums.ProviderVerificationStatus
     rejectionReason: string | null
@@ -2450,11 +3152,13 @@ readonly fields: ProviderProfileFieldRefs;
 export interface Prisma__ProviderProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  wallet<T extends Prisma.ProviderProfile$walletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$walletArgs<ExtArgs>>): Prisma.Prisma__ProviderWalletClient<runtime.Types.Result.GetResult<Prisma.$ProviderWalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   services<T extends Prisma.ProviderProfile$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProviderServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.ProviderProfile$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProviderDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availability<T extends Prisma.ProviderProfile$availabilityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$availabilityArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProviderAvailabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookings<T extends Prisma.ProviderProfile$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookingRequests<T extends Prisma.ProviderProfile$bookingRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$bookingRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingProviderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.ProviderProfile$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProviderProfile$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2489,6 +3193,11 @@ export interface ProviderProfileFieldRefs {
   readonly displayName: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly bio: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly experienceYears: Prisma.FieldRef<"ProviderProfile", 'Int'>
+  readonly profession: Prisma.FieldRef<"ProviderProfile", 'String'>
+  readonly address: Prisma.FieldRef<"ProviderProfile", 'String'>
+  readonly city: Prisma.FieldRef<"ProviderProfile", 'String'>
+  readonly state: Prisma.FieldRef<"ProviderProfile", 'String'>
+  readonly pincode: Prisma.FieldRef<"ProviderProfile", 'String'>
   readonly status: Prisma.FieldRef<"ProviderProfile", 'ProviderStatus'>
   readonly verificationStatus: Prisma.FieldRef<"ProviderProfile", 'ProviderVerificationStatus'>
   readonly rejectionReason: Prisma.FieldRef<"ProviderProfile", 'String'>
@@ -2909,6 +3618,25 @@ export type ProviderProfileDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * ProviderProfile.wallet
+ */
+export type ProviderProfile$walletArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProviderWallet
+   */
+  select?: Prisma.ProviderWalletSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProviderWallet
+   */
+  omit?: Prisma.ProviderWalletOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProviderWalletInclude<ExtArgs> | null
+  where?: Prisma.ProviderWalletWhereInput
+}
+
+/**
  * ProviderProfile.services
  */
 export type ProviderProfile$servicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3026,6 +3754,30 @@ export type ProviderProfile$bookingRequestsArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.BookingProviderScalarFieldEnum | Prisma.BookingProviderScalarFieldEnum[]
+}
+
+/**
+ * ProviderProfile.reviews
+ */
+export type ProviderProfile$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
+  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
 }
 
 /**

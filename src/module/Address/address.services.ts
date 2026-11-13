@@ -1,6 +1,15 @@
 import { prisma } from "../../lib/prisma.js";
 import { AppError } from "../../errors/AppError.js";
 import type { AddressType } from "../../generated/prisma/enums.js";
+import type { Prisma } from "../../generated/prisma/client.js";
+
+// CODE-01: all default-address changes run in one transaction, serialized per
+// user with an advisory lock, so a user can never end up with 0 or 2 defaults.
+const withUserLock = <T>(userId: number, fn: (tx: Prisma.TransactionClient) => Promise<T>) =>
+    prisma.$transaction(async (tx) => {
+        await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${"address:" + userId}))`;
+        return fn(tx);
+    });
 
 export interface CreateAddressInput {
     buildingName?: string | null;
@@ -44,8 +53,9 @@ const createAddress = async (userId: number, payload: CreateAddressInput) => {
         throw new AppError(400, "City, state, and pincode are required");
     }
 
+    return withUserLock(userId, async (tx) => {
     // Check existing address count for the user
-    const existingCount = await prisma.address.count({
+    const existingCount = await tx.address.count({
         where: { userId },
     });
 
@@ -54,13 +64,13 @@ const createAddress = async (userId: number, payload: CreateAddressInput) => {
 
     // If this address is set as default, reset other default addresses
     if (isDefault && existingCount > 0) {
-        await prisma.address.updateMany({
+        await tx.address.updateMany({
             where: { userId, isDefault: true },
             data: { isDefault: false },
         });
     }
 
-    const newAddress = await prisma.address.create({
+    const newAddress = await tx.address.create({
         data: {
             userId,
             buildingName: payload.buildingName?.trim() || null,
@@ -79,6 +89,7 @@ const createAddress = async (userId: number, payload: CreateAddressInput) => {
     });
 
     return newAddress;
+    });
 };
 
 // ---------------------------------------------
@@ -133,15 +144,16 @@ const updateAddress = async (
         throw new AppError(404, "Address not found");
     }
 
+    return withUserLock(userId, async (tx) => {
     // If updating to default, unset previous default addresses
     if (payload.isDefault === true) {
-        await prisma.address.updateMany({
+        await tx.address.updateMany({
             where: { userId, isDefault: true, id: { not: addressId } },
             data: { isDefault: false },
         });
     }
 
-    const updated = await prisma.address.update({
+    const updated = await tx.address.update({
         where: { id: addressId },
         data: {
             ...(payload.buildingName !== undefined && {
@@ -183,7 +195,18 @@ const updateAddress = async (
         },
     });
 
+    // Unsetting the only default would leave none: promote the most recent other address
+    if (payload.isDefault === false && existingAddress.isDefault) {
+        const next = await tx.address.findFirst({
+            where: { userId, id: { not: addressId } },
+            orderBy: { createdAt: "desc" },
+            select: { id: true },
+        });
+        if (next) await tx.address.update({ where: { id: next.id }, data: { isDefault: true } });
+    }
+
     return updated;
+    });
 };
 
 // ---------------------------------------------
@@ -202,24 +225,26 @@ const deleteAddress = async (userId: number, addressId: number) => {
         throw new AppError(404, "Address not found");
     }
 
-    await prisma.address.delete({
+    await withUserLock(userId, async (tx) => {
+    await tx.address.delete({
         where: { id: addressId },
     });
 
     // If deleted address was default, promote the next recent address
     if (existingAddress.isDefault) {
-        const nextAddress = await prisma.address.findFirst({
+        const nextAddress = await tx.address.findFirst({
             where: { userId },
             orderBy: { createdAt: "desc" },
         });
 
         if (nextAddress) {
-            await prisma.address.update({
+            await tx.address.update({
                 where: { id: nextAddress.id },
                 data: { isDefault: true },
             });
         }
     }
+    });
 
     return { id: addressId };
 };
@@ -240,19 +265,17 @@ const setDefaultAddress = async (userId: number, addressId: number) => {
         throw new AppError(404, "Address not found");
     }
 
-    // Reset existing defaults
-    await prisma.address.updateMany({
-        where: { userId, isDefault: true },
-        data: { isDefault: false },
-    });
+    return withUserLock(userId, async (tx) => {
+        await tx.address.updateMany({
+            where: { userId, isDefault: true },
+            data: { isDefault: false },
+        });
 
-    // Set target address as default
-    const updated = await prisma.address.update({
-        where: { id: addressId },
-        data: { isDefault: true },
+        return tx.address.update({
+            where: { id: addressId },
+            data: { isDefault: true },
+        });
     });
-
-    return updated;
 };
 
 export const AddressService = {

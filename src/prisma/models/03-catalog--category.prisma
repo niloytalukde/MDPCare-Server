@@ -1,0 +1,17 @@
+// =====================================================
+// Service categories (admin only)
+// =====================================================
+
+/// A group of services, e.g. 'Cleaning' or 'Nursing'. Created by the admin.
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  imageUrl    String?
+  services    Service[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Commission rules for this category
+  commissionConfigs CommissionConfig[]
+}

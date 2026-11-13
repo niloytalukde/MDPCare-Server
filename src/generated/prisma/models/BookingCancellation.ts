@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model BookingCancellation
- * 
+ * Who cancelled a booking and why.
  */
 export type BookingCancellationModel = runtime.Types.Result.DefaultSelection<Prisma.$BookingCancellationPayload>
 
@@ -411,18 +411,6 @@ export type BookingCancellationNullableScalarRelationFilter = {
 
 export type EnumBookingCancellationActorFieldUpdateOperationsInput = {
   set?: $Enums.BookingCancellationActor
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type BookingCancellationCreateNestedOneWithoutBookingInput = {

@@ -1,0 +1,39 @@
+// =====================================================
+// Saved customer addresses
+// =====================================================
+
+enum AddressType {
+  HOME
+  WORK
+  OTHER
+}
+
+/// A saved address of a customer (home, work...). Bookings copy the address so old bookings never change.
+model Address {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  buildingName String?
+  floor        String?
+  flatNo       String?
+  street       String?
+  area         String?
+  city         String
+  state        String
+  pincode      String
+
+  latitude  Float?
+  longitude Float?
+
+  bookings Booking[]
+
+  addressType AddressType @default(HOME)
+  isDefault   Boolean     @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, isDefault])
+}

@@ -1,0 +1,23 @@
+// =====================================================
+// Agency weekly working hours
+// =====================================================
+
+/// The weekly working hours of an agency.
+model AgencyAvailability {
+  id Int @id @default(autoincrement())
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  // 0 = Sunday ... 6 = Saturday
+  dayOfWeek Int
+  startTime String // "09:00"
+  endTime   String // "18:00"
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([agencyId, dayOfWeek, isActive])
+}

@@ -1,0 +1,70 @@
+// =====================================================
+// Agency wallet (separate from provider wallet)
+// =====================================================
+
+/// Money balance of an agency. Only the OWNER controls it.
+model AgencyWallet {
+  id       Int    @id @default(autoincrement())
+  agencyId Int    @unique
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Restrict)
+
+  balance        Decimal @default(0) @db.Decimal(14, 2)
+  pendingBalance Decimal @default(0) @db.Decimal(14, 2)
+  totalEarnings  Decimal @default(0) @db.Decimal(14, 2)
+  totalWithdrawn Decimal @default(0) @db.Decimal(14, 2)
+
+  transactions AgencyWalletTransaction[]
+  payouts      AgencyWalletPayout[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// One money movement in an agency wallet (never edited, only added).
+model AgencyWalletTransaction {
+  id       Int          @id @default(autoincrement())
+  walletId Int
+  wallet   AgencyWallet @relation(fields: [walletId], references: [id], onDelete: Restrict)
+
+  type   WalletTransactionType
+  reason WalletTransactionReason
+  status WalletTransactionStatus @default(PENDING)
+
+  amount        Decimal  @db.Decimal(14, 2)
+  balanceBefore Decimal? @db.Decimal(14, 2)
+  balanceAfter  Decimal? @db.Decimal(14, 2)
+
+  bookingId Int?
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+
+  // Deterministic idempotency key, e.g. "booking:42:settlement"
+  referenceId String? @unique
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([walletId, createdAt])
+  @@index([bookingId])
+  @@index([status])
+}
+
+/// An agency's request to withdraw money to its bank.
+model AgencyWalletPayout {
+  id       Int          @id @default(autoincrement())
+  walletId Int
+  wallet   AgencyWallet @relation(fields: [walletId], references: [id], onDelete: Restrict)
+
+  amount Decimal      @db.Decimal(14, 2)
+  status PayoutStatus @default(PENDING)
+
+  bankReference    String?
+  paymentReference String?
+  failureReason    String?
+
+  requestedAt DateTime  @default(now())
+  processedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+
+  @@index([walletId, status])
+}

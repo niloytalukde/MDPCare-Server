@@ -1,0 +1,99 @@
+// =====================================================
+// Finding a provider/agency: rounds and requests
+// =====================================================
+
+enum BookingRequestStatus {
+  SENT
+  DELIVERED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  CANCELLED
+}
+
+enum BookingRoundStatus {
+  SEARCHING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+/// One search round: 'look for providers/agencies within X km for Y seconds'.
+model BookingBroadcastRound {
+  id Int @id @default(autoincrement())
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  round       Int
+  radiusKm    Int
+  minRadiusKm Int @default(0)
+
+  status BookingRoundStatus @default(SEARCHING)
+
+  startedAt   DateTime  @default(now())
+  expiresAt   DateTime?
+  completedAt DateTime?
+
+  providersFound Int @default(0)
+  providersSent  Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@unique([bookingId, round])
+  @@index([bookingId, status])
+}
+
+/// A booking request sent to one individual provider in a search round.
+model BookingProvider {
+  id Int @id @default(autoincrement())
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  providerId Int
+  provider   ProviderProfile @relation(fields: [providerId], references: [id], onDelete: Restrict)
+
+  searchRound Int
+  distanceKm  Decimal @db.Decimal(8, 3)
+
+  status BookingRequestStatus @default(SENT)
+
+  sentAt      DateTime  @default(now())
+  deliveredAt DateTime?
+  respondedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([bookingId, providerId])
+  @@index([providerId, status])
+  @@index([bookingId, searchRound])
+}
+
+/// A booking request sent to one agency in a search round.
+model BookingAgency {
+  id Int @id @default(autoincrement())
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Restrict)
+
+  searchRound Int
+  distanceKm  Decimal @db.Decimal(8, 3)
+
+  status BookingRequestStatus @default(SENT)
+
+  sentAt      DateTime  @default(now())
+  deliveredAt DateTime?
+  respondedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([bookingId, agencyId])
+  @@index([agencyId, status])
+  @@index([bookingId, searchRound])
+}

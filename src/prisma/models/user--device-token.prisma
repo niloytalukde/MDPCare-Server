@@ -1,0 +1,36 @@
+// =====================================================
+// Phones that receive push notifications (NEW)
+// =====================================================
+
+enum DevicePlatform {
+  ANDROID
+  IOS
+  WEB
+}
+
+/// Which of our apps the phone is using.
+enum AppType {
+  CUSTOMER_APP
+  PROVIDER_APP // one app for individual providers, agency owners/managers and staff
+}
+
+/// One phone (or browser) that can receive push notifications for a user.
+/// A user can have several phones, so this is a separate table.
+model DeviceToken {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  token    String         @unique // Firebase Cloud Messaging (FCM) token
+  platform DevicePlatform
+  appType  AppType
+
+  isActive   Boolean  @default(true) // set false when Firebase says the token is invalid
+  lastUsedAt DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, isActive])
+}

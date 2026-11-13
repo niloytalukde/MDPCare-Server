@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model Address
- * 
+ * A saved address of a customer (home, work...). Bookings copy the address so old bookings never change.
  */
 export type AddressModel = runtime.Types.Result.DefaultSelection<Prisma.$AddressPayload>
 

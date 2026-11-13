@@ -193,15 +193,13 @@ const deleteCategory = async (categoryId: number, cascade = false) => {
         );
     }
 
-    // If cascade is requested, delete linked services first
-    if (servicesCount > 0 && cascade) {
-        await prisma.service.deleteMany({
-            where: { categoryId },
-        });
-    }
-
-    await prisma.category.delete({
-        where: { id: categoryId },
+    // CODE-05: services + category deleted atomically. If any service is referenced
+    // by bookings/providers (FK RESTRICT) the whole operation rolls back (409).
+    await prisma.$transaction(async (tx) => {
+        if (servicesCount > 0 && cascade) {
+            await tx.service.deleteMany({ where: { categoryId } });
+        }
+        await tx.category.delete({ where: { id: categoryId } });
     });
 
     return { id: categoryId };

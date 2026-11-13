@@ -1,0 +1,46 @@
+// =====================================================
+// Money returned to customers (NEW)
+// =====================================================
+
+enum RefundStatus {
+  REQUESTED
+  APPROVED
+  PROCESSING // sent to the gateway
+  COMPLETED
+  REJECTED
+  FAILED
+}
+
+/// Money sent back to a customer for a payment (full or part).
+model Refund {
+  id Int @id @default(autoincrement())
+
+  paymentId Int
+  payment   Payment @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+
+  amount Decimal      @db.Decimal(12, 2)
+  status RefundStatus @default(REQUESTED)
+
+  reason          String?
+  rejectionReason String?
+
+  gatewayRefundId String? @unique
+
+  requestedById Int?
+  requestedBy   User? @relation("RefundRequestedBy", fields: [requestedById], references: [id], onDelete: SetNull)
+  processedById Int? // the admin who approved / rejected it
+  processedBy   User? @relation("RefundProcessedBy", fields: [processedById], references: [id], onDelete: SetNull)
+
+  requestedAt DateTime  @default(now())
+  processedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+
+  @@index([paymentId])
+  @@index([bookingId])
+  @@index([status, requestedAt])
+  @@index([requestedById])
+  @@index([processedById])
+}

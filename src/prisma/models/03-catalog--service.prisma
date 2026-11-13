@@ -1,0 +1,32 @@
+// =====================================================
+// Services and their prices (admin only)
+// =====================================================
+
+/// One service customers can book, with the price set by the admin.
+model Service {
+  id               Int               @id @default(autoincrement())
+  name             String            @unique
+  description      String?
+  categoryId       Int
+  category         Category          @relation(fields: [categoryId], references: [id])
+  price            Float
+  discountPrice    Float?
+  timeRequired     Int?
+  imageUrl         String?
+  includes         String[]
+  excludes         String[]
+  bookingItems     BookingItem[]
+  providerServices ProviderService[]
+
+  // Agency services
+  agencyServices AgencyService[]
+
+  // Staff qualifications
+  agencyStaffServices AgencyStaffService[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Commission rules for this service
+  commissionConfigs CommissionConfig[]
+}

@@ -1,0 +1,99 @@
+// =====================================================
+// Agency (company) profile
+// =====================================================
+
+enum AgencyStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum AgencyVerificationStatus {
+  NOT_SUBMITTED
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum AgencyAvailabilityStatus {
+  ONLINE
+  OFFLINE
+}
+
+/// A company that does services with its own staff. Bookings and money belong to the agency.
+model Agency {
+  id          Int     @id @default(autoincrement())
+  name        String
+  slug        String  @unique
+  description String?
+
+  // Business details
+  legalName          String?
+  registrationNumber String? @unique
+  gstNumber          String? @unique
+  panNumber          String? @unique
+
+  // Contact details
+  email          String?
+  phone          String
+  alternatePhone String?
+
+  // Address
+  address String?
+  city    String
+  state   String
+  country String  @default("India")
+  pincode String
+
+  latitude  Decimal? @db.Decimal(10, 7)
+  longitude Decimal? @db.Decimal(10, 7)
+
+  serviceRadiusKm Int @default(10)
+
+  // Profile
+  logoUrl       String?
+  coverImageUrl String?
+  website       String?
+
+  // Agency status
+  status AgencyStatus @default(PENDING)
+
+  verificationStatus AgencyVerificationStatus @default(NOT_SUBMITTED)
+
+  availabilityStatus AgencyAvailabilityStatus @default(OFFLINE)
+
+  rejectionReason String?
+  verifiedAt      DateTime?
+  approvedAt      DateTime?
+
+  // Performance
+  averageRating     Decimal @default(0) @db.Decimal(3, 2)
+  totalReviews      Int     @default(0)
+  totalBookings     Int     @default(0)
+  completedBookings Int     @default(0)
+  cancelledBookings Int     @default(0)
+
+  // Relations
+  members         AgencyMember[]
+  invitations     AgencyInvitation[]
+  documents       AgencyDocument[]
+  services        AgencyService[]
+  bookingRequests BookingAgency[]
+  bookings        Booking[]
+  assignments     AgencyBookingAssignment[]
+  availability    AgencyAvailability[]
+  wallet          AgencyWallet?
+  assignmentLog   AgencyAssignmentHistory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Reviews customers left for this agency
+  reviews Review[]
+
+  @@index([status, verificationStatus])
+  @@index([status, availabilityStatus])
+  @@index([city, state])
+  @@index([latitude, longitude])
+}

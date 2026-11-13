@@ -1,47 +1,27 @@
+// =====================================================================
+// CUSTOMER APP - login controllers   (mounted at /api/v1/auth)
+// =====================================================================
 
 import type { Request, Response } from "express";
-
 import catchAsync from "../../utils/catchAsync.js";
 import sendResponse from "../../utils/sendResponse.js";
-
-import { AppError } from "../../errors/AppError.js";
 import { AuthService } from "./auth.services.js";
 
-// ---------------------------------------------
-// 1. Send OTP Controller
-// POST /api/v1/auth/send-otp
-// ---------------------------------------------
-
+// POST /api/v1/auth/send-otp      body: { phone }
 const sendOTP = catchAsync(async (req: Request, res: Response) => {
-    const { phone } = req.body;
-
-    const result = await AuthService.sendOTPToPhone({
-        phone,
-    });
+    const result = await AuthService.sendOTPToPhone(req.body.phone);
 
     return sendResponse(res, {
         success: true,
         statusCode: 200,
         message: result.message,
-        data: {
-            phone: result.phone,
-            status: result.status,
-        },
+        data: { phone: result.phone, status: result.status, isNewUser: result.isNewUser },
     });
 });
 
-// ---------------------------------------------
-// 2. Verify OTP Controller
-// POST /api/v1/auth/verify-otp
-// ---------------------------------------------
-
+// POST /api/v1/auth/verify-otp    body: { phone, code }
 const verifyOTP = catchAsync(async (req: Request, res: Response) => {
-    const { phone, code } = req.body;
-
-    const result = await AuthService.verifyOTPAndRegister({
-        phone,
-        code,
-    });
+    const result = await AuthService.verifyOTPAndLogin(req.body.phone, req.body.code);
 
     return sendResponse(res, {
         success: true,
@@ -51,96 +31,33 @@ const verifyOTP = catchAsync(async (req: Request, res: Response) => {
             isNewUser: result.isNewUser,
             needsProfileCompletion: result.needsProfileCompletion,
             user: result.user,
-            tokens: {
-                accessToken: result.accessToken,
-                refreshToken: result.refreshToken,
-            },
+            tokens: result.tokens,
         },
     });
 });
 
-// ---------------------------------------------
-// 3. Update Profile Controller
-// PATCH /api/v1/auth/profile
-// ---------------------------------------------
-
-const updateProfile = catchAsync(async (req: Request, res: Response) => {
-    const userId = Number(req.user?.id);
-
-    if (!userId) {
-        throw new AppError(401, "Unauthorized access");
-    }
-
-    const { name, email, gender } = req.body;
-
-    const result = await AuthService.updateProfile(userId, {
-        name,
-        email,
-        gender,
-    });
+// POST /api/v1/auth/refresh-token body: { refreshToken }
+const refreshAccessToken = catchAsync(async (req: Request, res: Response) => {
+    const tokens = await AuthService.refreshAccessToken(req.body.refreshToken);
 
     return sendResponse(res, {
         success: true,
         statusCode: 200,
-        message: result.message,
-        data: result.user,
+        message: "Access token refreshed successfully",
+        data: tokens,
     });
 });
 
-// ---------------------------------------------
-// 4. Refresh Access Token Controller
-// POST /api/v1/auth/refresh-token
-// ---------------------------------------------
+// POST /api/v1/auth/logout
+const logout = catchAsync(async (req: Request, res: Response) => {
+    const result = await AuthService.logout(Number(req.user?.id));
 
-const refreshAccessToken = catchAsync(
-    async (req: Request, res: Response) => {
-        const { refreshToken } = req.body;
-
-        if (!refreshToken) {
-            throw new AppError(400, "Refresh token is required");
-        }
-
-        const result = await AuthService.refreshAccessToken(refreshToken);
-
-        return sendResponse(res, {
-            success: true,
-            statusCode: 200,
-            message: "Access token refreshed successfully",
-            data: result,
-        });
-    }
-);
-
-// ---------------------------------------------
-// 5. Get My Profile Controller
-// GET /api/v1/auth/me
-// ---------------------------------------------
-
-const getMyProfile = catchAsync(async (req: Request, res: Response) => {
-    const userId = Number(req.user?.id);
-
-    if (!userId) {
-        throw new AppError(401, "Unauthorized access");
-    }
-
-    const result = await AuthService.getMyProfile(userId);
-
-    return sendResponse(res, {
-        success: true,
-        statusCode: 200,
-        message: "Profile retrieved successfully",
-        data: result,
-    });
+    return sendResponse(res, { success: true, statusCode: 200, message: result.message });
 });
-
-// ---------------------------------------------
-// Export Controllers
-// ---------------------------------------------
 
 export const AuthController = {
     sendOTP,
     verifyOTP,
-    updateProfile,
     refreshAccessToken,
-    getMyProfile,
+    logout,
 };

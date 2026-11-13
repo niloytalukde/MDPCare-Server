@@ -1,0 +1,40 @@
+// =====================================================
+// In-app notifications (NEW)
+// =====================================================
+
+enum NotificationType {
+  BOOKING
+  PAYMENT
+  WALLET
+  AGENCY
+  REVIEW
+  SUPPORT
+  SYSTEM
+  PROMOTION
+}
+
+/// A message shown in the app's notification list. A push notification is
+/// sent to the user's DeviceTokens by a background job.
+model Notification {
+  id Int @id @default(autoincrement())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type  NotificationType
+  title String
+  body  String
+  data  Json? // extra info for the app, e.g. { "screen": "BookingDetails" }
+
+  bookingId Int?
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  readAt     DateTime? // empty = not read yet
+  pushSentAt DateTime? // empty = push not sent yet
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, readAt])
+  @@index([userId, createdAt])
+  @@index([bookingId])
+}

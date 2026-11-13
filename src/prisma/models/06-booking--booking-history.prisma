@@ -1,0 +1,45 @@
+// =====================================================
+// Status history and cancellation
+// =====================================================
+
+enum BookingCancellationActor {
+  CUSTOMER
+  PROVIDER
+  AGENCY
+  ADMIN
+  SYSTEM
+}
+
+/// Every status change of a booking (never edited, only added).
+model BookingStatusHistory {
+  id Int @id @default(autoincrement())
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  status BookingStatus
+
+  changedBy   Int?
+  changedRole String?
+  note        String?
+
+  createdAt DateTime @default(now())
+
+  @@index([bookingId, createdAt])
+  @@index([changedBy])
+}
+
+/// Who cancelled a booking and why.
+model BookingCancellation {
+  id Int @id @default(autoincrement())
+
+  bookingId Int     @unique
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  actor       BookingCancellationActor
+  actorId     Int?
+  reason      String?
+  description String?
+
+  cancelledAt DateTime @default(now())
+}

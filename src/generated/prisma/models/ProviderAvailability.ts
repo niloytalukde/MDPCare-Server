@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ProviderAvailability
- * 
+ * The weekly working hours of a provider (one row per day/time slot).
  */
 export type ProviderAvailabilityModel = runtime.Types.Result.DefaultSelection<Prisma.$ProviderAvailabilityPayload>
 
@@ -381,16 +381,6 @@ export type ProviderAvailabilityUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ProviderAvailabilityListRelationFilter = {
-  every?: Prisma.ProviderAvailabilityWhereInput
-  some?: Prisma.ProviderAvailabilityWhereInput
-  none?: Prisma.ProviderAvailabilityWhereInput
-}
-
-export type ProviderAvailabilityOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type ProviderAvailabilityCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   providerId?: Prisma.SortOrder
@@ -434,6 +424,20 @@ export type ProviderAvailabilitySumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   providerId?: Prisma.SortOrder
   dayOfWeek?: Prisma.SortOrder
+}
+
+export type ProviderAvailabilityListRelationFilter = {
+  every?: Prisma.ProviderAvailabilityWhereInput
+  some?: Prisma.ProviderAvailabilityWhereInput
+  none?: Prisma.ProviderAvailabilityWhereInput
+}
+
+export type ProviderAvailabilityOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type ProviderAvailabilityCreateNestedManyWithoutProviderInput = {

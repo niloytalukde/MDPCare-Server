@@ -1,0 +1,26 @@
+// =====================================================
+// Login / registration OTP codes
+// =====================================================
+
+enum OtpPurpose {
+  REGISTRATION
+  LOGIN
+}
+
+/// A one-time login/registration code sent by SMS. Only the hash is stored, never the code.
+model OtpCode {
+  id      String     @id @default(uuid())
+  phone   String
+  otpHash String
+  purpose OtpPurpose @default(REGISTRATION)
+
+  attempts   Int       @default(0)
+  expiresAt  DateTime
+  verifiedAt DateTime?
+  consumedAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([phone, purpose])
+  @@index([expiresAt])
+}

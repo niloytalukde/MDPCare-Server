@@ -1,0 +1,41 @@
+// =====================================================
+// Invites to join an agency
+// =====================================================
+
+enum AgencyInvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+/// An invite sent by the agency to a phone number to join as staff.
+model AgencyInvitation {
+  id Int @id @default(autoincrement())
+
+  agencyId Int
+  agency   Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  phone String
+  email String?
+
+  invitedById Int
+  invitedBy   AgencyMember @relation("InvitationSentBy", fields: [invitedById], references: [id], onDelete: Restrict)
+
+  status AgencyInvitationStatus @default(PENDING)
+
+  // Store token hash, never raw token
+  tokenHash String? @unique
+
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  cancelledAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([agencyId, phone])
+  @@index([phone, status])
+  @@index([agencyId, status])
+  @@index([invitedById])
+}

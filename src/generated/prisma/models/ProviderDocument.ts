@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ProviderDocument
- * 
+ * An ID/certificate a provider uploads so the admin can verify them.
  */
 export type ProviderDocumentModel = runtime.Types.Result.DefaultSelection<Prisma.$ProviderDocumentPayload>
 
@@ -415,16 +415,6 @@ export type ProviderDocumentUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ProviderDocumentListRelationFilter = {
-  every?: Prisma.ProviderDocumentWhereInput
-  some?: Prisma.ProviderDocumentWhereInput
-  none?: Prisma.ProviderDocumentWhereInput
-}
-
-export type ProviderDocumentOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type ProviderDocumentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   providerId?: Prisma.SortOrder
@@ -474,6 +464,24 @@ export type ProviderDocumentSumOrderByAggregateInput = {
   providerId?: Prisma.SortOrder
 }
 
+export type ProviderDocumentListRelationFilter = {
+  every?: Prisma.ProviderDocumentWhereInput
+  some?: Prisma.ProviderDocumentWhereInput
+  none?: Prisma.ProviderDocumentWhereInput
+}
+
+export type ProviderDocumentOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type EnumProviderDocumentTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ProviderDocumentType
+}
+
+export type EnumProviderVerificationStatusFieldUpdateOperationsInput = {
+  set?: $Enums.ProviderVerificationStatus
+}
+
 export type ProviderDocumentCreateNestedManyWithoutProviderInput = {
   create?: Prisma.XOR<Prisma.ProviderDocumentCreateWithoutProviderInput, Prisma.ProviderDocumentUncheckedCreateWithoutProviderInput> | Prisma.ProviderDocumentCreateWithoutProviderInput[] | Prisma.ProviderDocumentUncheckedCreateWithoutProviderInput[]
   connectOrCreate?: Prisma.ProviderDocumentCreateOrConnectWithoutProviderInput | Prisma.ProviderDocumentCreateOrConnectWithoutProviderInput[]
@@ -514,10 +522,6 @@ export type ProviderDocumentUncheckedUpdateManyWithoutProviderNestedInput = {
   update?: Prisma.ProviderDocumentUpdateWithWhereUniqueWithoutProviderInput | Prisma.ProviderDocumentUpdateWithWhereUniqueWithoutProviderInput[]
   updateMany?: Prisma.ProviderDocumentUpdateManyWithWhereWithoutProviderInput | Prisma.ProviderDocumentUpdateManyWithWhereWithoutProviderInput[]
   deleteMany?: Prisma.ProviderDocumentScalarWhereInput | Prisma.ProviderDocumentScalarWhereInput[]
-}
-
-export type EnumProviderDocumentTypeFieldUpdateOperationsInput = {
-  set?: $Enums.ProviderDocumentType
 }
 
 export type ProviderDocumentCreateWithoutProviderInput = {

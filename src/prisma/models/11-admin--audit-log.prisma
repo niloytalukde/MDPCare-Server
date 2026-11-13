@@ -1,0 +1,29 @@
+// =====================================================
+// Who did what, for security checks (NEW)
+// =====================================================
+
+/// A record of an important action: who did it, to what, and what changed.
+/// Only ever ADD rows here; never update or delete them.
+model AuditLog {
+  id Int @id @default(autoincrement())
+
+  actorUserId Int? // empty = done by the system (e.g. a background job)
+  actorUser   User?   @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+  actorRole   String? // e.g. "ADMIN", "AGENCY_OWNER"
+
+  action     String // e.g. "PROVIDER_APPROVED", "PAYOUT_COMPLETED"
+  entityType String // e.g. "ProviderProfile", "WalletPayout"
+  entityId   String // id of that row, stored as text
+
+  oldValues Json? // the row before the change
+  newValues Json? // the row after the change
+
+  ipAddress String?
+  userAgent String?
+
+  createdAt DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([actorUserId, createdAt])
+  @@index([action, createdAt])
+}

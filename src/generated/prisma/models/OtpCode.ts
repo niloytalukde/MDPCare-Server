@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model OtpCode
- * 
+ * A one-time login/registration code sent by SMS. Only the hash is stored, never the code.
  */
 export type OtpCodeModel = runtime.Types.Result.DefaultSelection<Prisma.$OtpCodePayload>
 
@@ -437,8 +437,28 @@ export type OtpCodeSumOrderByAggregateInput = {
   attempts?: Prisma.SortOrder
 }
 
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
 export type EnumOtpPurposeFieldUpdateOperationsInput = {
   set?: $Enums.OtpPurpose
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 

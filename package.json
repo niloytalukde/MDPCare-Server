@@ -7,7 +7,13 @@
     "dev": "tsx watch src/app/server.ts",
     "build": "tsc",
     "start": "node dist/src/app/server.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --import ./tests/setup-env.ts --test tests/unit/*.test.ts",
+    "test:integration": "node --import tsx --import ./tests/setup-env.ts --test --test-concurrency=1 tests/integration/*.test.ts",
+    "prisma:validate": "prisma validate --config prisma.config.ts",
+    "prisma:generate": "prisma generate --config prisma.config.ts",
+    "migrate:status": "prisma migrate status --config prisma.config.ts",
+    "migrate:deploy": "prisma migrate deploy --config prisma.config.ts"
   },
   "keywords": [],
   "author": "",

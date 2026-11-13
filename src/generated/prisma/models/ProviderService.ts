@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace.js"
 
 /**
  * Model ProviderService
- * 
+ * Which admin services an individual provider can do.
  */
 export type ProviderServiceModel = runtime.Types.Result.DefaultSelection<Prisma.$ProviderServicePayload>
 
@@ -428,48 +428,6 @@ export type ProviderServiceSumOrderByAggregateInput = {
   customPrice?: Prisma.SortOrder
 }
 
-export type ProviderServiceCreateNestedManyWithoutProviderInput = {
-  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
-  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
-  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
-  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-}
-
-export type ProviderServiceUncheckedCreateNestedManyWithoutProviderInput = {
-  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
-  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
-  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
-  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-}
-
-export type ProviderServiceUpdateManyWithoutProviderNestedInput = {
-  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
-  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
-  upsert?: Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput[]
-  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
-  set?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  disconnect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  delete?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  update?: Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput[]
-  updateMany?: Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput | Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput[]
-  deleteMany?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
-}
-
-export type ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput = {
-  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
-  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
-  upsert?: Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput[]
-  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
-  set?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  disconnect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  delete?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
-  update?: Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput[]
-  updateMany?: Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput | Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput[]
-  deleteMany?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
-}
-
 export type ProviderServiceCreateNestedManyWithoutServiceInput = {
   create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutServiceInput, Prisma.ProviderServiceUncheckedCreateWithoutServiceInput> | Prisma.ProviderServiceCreateWithoutServiceInput[] | Prisma.ProviderServiceUncheckedCreateWithoutServiceInput[]
   connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutServiceInput | Prisma.ProviderServiceCreateOrConnectWithoutServiceInput[]
@@ -512,60 +470,46 @@ export type ProviderServiceUncheckedUpdateManyWithoutServiceNestedInput = {
   deleteMany?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
 }
 
-export type ProviderServiceCreateWithoutProviderInput = {
-  customPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  service: Prisma.ServiceCreateNestedOneWithoutProviderServicesInput
+export type ProviderServiceCreateNestedManyWithoutProviderInput = {
+  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
+  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
+  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
+  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
 }
 
-export type ProviderServiceUncheckedCreateWithoutProviderInput = {
-  id?: number
-  serviceId: number
-  customPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
+export type ProviderServiceUncheckedCreateNestedManyWithoutProviderInput = {
+  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
+  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
+  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
+  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
 }
 
-export type ProviderServiceCreateOrConnectWithoutProviderInput = {
-  where: Prisma.ProviderServiceWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput>
+export type ProviderServiceUpdateManyWithoutProviderNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
+  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
+  upsert?: Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput[]
+  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
+  set?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  disconnect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  delete?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  update?: Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput[]
+  updateMany?: Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput | Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput[]
+  deleteMany?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
 }
 
-export type ProviderServiceCreateManyProviderInputEnvelope = {
-  data: Prisma.ProviderServiceCreateManyProviderInput | Prisma.ProviderServiceCreateManyProviderInput[]
-  skipDuplicates?: boolean
-}
-
-export type ProviderServiceUpsertWithWhereUniqueWithoutProviderInput = {
-  where: Prisma.ProviderServiceWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProviderServiceUpdateWithoutProviderInput, Prisma.ProviderServiceUncheckedUpdateWithoutProviderInput>
-  create: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput>
-}
-
-export type ProviderServiceUpdateWithWhereUniqueWithoutProviderInput = {
-  where: Prisma.ProviderServiceWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProviderServiceUpdateWithoutProviderInput, Prisma.ProviderServiceUncheckedUpdateWithoutProviderInput>
-}
-
-export type ProviderServiceUpdateManyWithWhereWithoutProviderInput = {
-  where: Prisma.ProviderServiceScalarWhereInput
-  data: Prisma.XOR<Prisma.ProviderServiceUpdateManyMutationInput, Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderInput>
-}
-
-export type ProviderServiceScalarWhereInput = {
-  AND?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
-  OR?: Prisma.ProviderServiceScalarWhereInput[]
-  NOT?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
-  id?: Prisma.IntFilter<"ProviderService"> | number
-  providerId?: Prisma.IntFilter<"ProviderService"> | number
-  serviceId?: Prisma.IntFilter<"ProviderService"> | number
-  customPrice?: Prisma.DecimalNullableFilter<"ProviderService"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: Prisma.BoolFilter<"ProviderService"> | boolean
-  createdAt?: Prisma.DateTimeFilter<"ProviderService"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"ProviderService"> | Date | string
+export type ProviderServiceUncheckedUpdateManyWithoutProviderNestedInput = {
+  create?: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput> | Prisma.ProviderServiceCreateWithoutProviderInput[] | Prisma.ProviderServiceUncheckedCreateWithoutProviderInput[]
+  connectOrCreate?: Prisma.ProviderServiceCreateOrConnectWithoutProviderInput | Prisma.ProviderServiceCreateOrConnectWithoutProviderInput[]
+  upsert?: Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpsertWithWhereUniqueWithoutProviderInput[]
+  createMany?: Prisma.ProviderServiceCreateManyProviderInputEnvelope
+  set?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  disconnect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  delete?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  connect?: Prisma.ProviderServiceWhereUniqueInput | Prisma.ProviderServiceWhereUniqueInput[]
+  update?: Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput | Prisma.ProviderServiceUpdateWithWhereUniqueWithoutProviderInput[]
+  updateMany?: Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput | Prisma.ProviderServiceUpdateManyWithWhereWithoutProviderInput[]
+  deleteMany?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
 }
 
 export type ProviderServiceCreateWithoutServiceInput = {
@@ -611,7 +555,28 @@ export type ProviderServiceUpdateManyWithWhereWithoutServiceInput = {
   data: Prisma.XOR<Prisma.ProviderServiceUpdateManyMutationInput, Prisma.ProviderServiceUncheckedUpdateManyWithoutServiceInput>
 }
 
-export type ProviderServiceCreateManyProviderInput = {
+export type ProviderServiceScalarWhereInput = {
+  AND?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
+  OR?: Prisma.ProviderServiceScalarWhereInput[]
+  NOT?: Prisma.ProviderServiceScalarWhereInput | Prisma.ProviderServiceScalarWhereInput[]
+  id?: Prisma.IntFilter<"ProviderService"> | number
+  providerId?: Prisma.IntFilter<"ProviderService"> | number
+  serviceId?: Prisma.IntFilter<"ProviderService"> | number
+  customPrice?: Prisma.DecimalNullableFilter<"ProviderService"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: Prisma.BoolFilter<"ProviderService"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"ProviderService"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ProviderService"> | Date | string
+}
+
+export type ProviderServiceCreateWithoutProviderInput = {
+  customPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  service: Prisma.ServiceCreateNestedOneWithoutProviderServicesInput
+}
+
+export type ProviderServiceUncheckedCreateWithoutProviderInput = {
   id?: number
   serviceId: number
   customPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -620,30 +585,30 @@ export type ProviderServiceCreateManyProviderInput = {
   updatedAt?: Date | string
 }
 
-export type ProviderServiceUpdateWithoutProviderInput = {
-  customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  service?: Prisma.ServiceUpdateOneRequiredWithoutProviderServicesNestedInput
+export type ProviderServiceCreateOrConnectWithoutProviderInput = {
+  where: Prisma.ProviderServiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput>
 }
 
-export type ProviderServiceUncheckedUpdateWithoutProviderInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ProviderServiceCreateManyProviderInputEnvelope = {
+  data: Prisma.ProviderServiceCreateManyProviderInput | Prisma.ProviderServiceCreateManyProviderInput[]
+  skipDuplicates?: boolean
 }
 
-export type ProviderServiceUncheckedUpdateManyWithoutProviderInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
-  customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type ProviderServiceUpsertWithWhereUniqueWithoutProviderInput = {
+  where: Prisma.ProviderServiceWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProviderServiceUpdateWithoutProviderInput, Prisma.ProviderServiceUncheckedUpdateWithoutProviderInput>
+  create: Prisma.XOR<Prisma.ProviderServiceCreateWithoutProviderInput, Prisma.ProviderServiceUncheckedCreateWithoutProviderInput>
+}
+
+export type ProviderServiceUpdateWithWhereUniqueWithoutProviderInput = {
+  where: Prisma.ProviderServiceWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProviderServiceUpdateWithoutProviderInput, Prisma.ProviderServiceUncheckedUpdateWithoutProviderInput>
+}
+
+export type ProviderServiceUpdateManyWithWhereWithoutProviderInput = {
+  where: Prisma.ProviderServiceScalarWhereInput
+  data: Prisma.XOR<Prisma.ProviderServiceUpdateManyMutationInput, Prisma.ProviderServiceUncheckedUpdateManyWithoutProviderInput>
 }
 
 export type ProviderServiceCreateManyServiceInput = {
@@ -675,6 +640,41 @@ export type ProviderServiceUncheckedUpdateWithoutServiceInput = {
 export type ProviderServiceUncheckedUpdateManyWithoutServiceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   providerId?: Prisma.IntFieldUpdateOperationsInput | number
+  customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ProviderServiceCreateManyProviderInput = {
+  id?: number
+  serviceId: number
+  customPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProviderServiceUpdateWithoutProviderInput = {
+  customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  service?: Prisma.ServiceUpdateOneRequiredWithoutProviderServicesNestedInput
+}
+
+export type ProviderServiceUncheckedUpdateWithoutProviderInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
+  customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ProviderServiceUncheckedUpdateManyWithoutProviderInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  serviceId?: Prisma.IntFieldUpdateOperationsInput | number
   customPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string

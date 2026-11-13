@@ -9,67 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const BookingStatus = {
-  PENDING: 'PENDING',
-  SEARCHING_PROVIDER: 'SEARCHING_PROVIDER',
-  CONFIRMED: 'CONFIRMED',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED',
-  EXPIRED: 'EXPIRED'
-} as const
-
-export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
-
-
-export const BookingType = {
-  INSTANT: 'INSTANT',
-  SCHEDULED: 'SCHEDULED'
-} as const
-
-export type BookingType = (typeof BookingType)[keyof typeof BookingType]
-
-
-export const BookingRequestStatus = {
-  SENT: 'SENT',
-  DELIVERED: 'DELIVERED',
-  ACCEPTED: 'ACCEPTED',
-  REJECTED: 'REJECTED',
-  EXPIRED: 'EXPIRED',
-  CANCELLED: 'CANCELLED'
-} as const
-
-export type BookingRequestStatus = (typeof BookingRequestStatus)[keyof typeof BookingRequestStatus]
-
-
-export const BookingRoundStatus = {
-  SEARCHING: 'SEARCHING',
-  ACCEPTED: 'ACCEPTED',
-  EXPIRED: 'EXPIRED',
-  CANCELLED: 'CANCELLED'
-} as const
-
-export type BookingRoundStatus = (typeof BookingRoundStatus)[keyof typeof BookingRoundStatus]
-
-
-export const BookingOTPType = {
-  SERVICE_START: 'SERVICE_START',
-  SERVICE_COMPLETION: 'SERVICE_COMPLETION'
-} as const
-
-export type BookingOTPType = (typeof BookingOTPType)[keyof typeof BookingOTPType]
-
-
-export const BookingCancellationActor = {
-  CUSTOMER: 'CUSTOMER',
-  PROVIDER: 'PROVIDER',
-  ADMIN: 'ADMIN',
-  SYSTEM: 'SYSTEM'
-} as const
-
-export type BookingCancellationActor = (typeof BookingCancellationActor)[keyof typeof BookingCancellationActor]
-
-
 export const OtpPurpose = {
   REGISTRATION: 'REGISTRATION',
   LOGIN: 'LOGIN'
@@ -119,6 +58,300 @@ export const ProviderDocumentType = {
 export type ProviderDocumentType = (typeof ProviderDocumentType)[keyof typeof ProviderDocumentType]
 
 
+export const AgencyDocumentType = {
+  BUSINESS_LICENSE: 'BUSINESS_LICENSE',
+  GST_CERTIFICATE: 'GST_CERTIFICATE',
+  PAN_CARD: 'PAN_CARD',
+  OWNER_ID_PROOF: 'OWNER_ID_PROOF',
+  ADDRESS_PROOF: 'ADDRESS_PROOF',
+  BANK_PROOF: 'BANK_PROOF',
+  CERTIFICATE: 'CERTIFICATE',
+  OTHER: 'OTHER'
+} as const
+
+export type AgencyDocumentType = (typeof AgencyDocumentType)[keyof typeof AgencyDocumentType]
+
+
+export const AgencyDocumentStatus = {
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type AgencyDocumentStatus = (typeof AgencyDocumentStatus)[keyof typeof AgencyDocumentStatus]
+
+
+export const AgencyInvitationStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type AgencyInvitationStatus = (typeof AgencyInvitationStatus)[keyof typeof AgencyInvitationStatus]
+
+
+export const AgencyMemberRole = {
+  OWNER: 'OWNER',
+  MANAGER: 'MANAGER',
+  STAFF: 'STAFF'
+} as const
+
+export type AgencyMemberRole = (typeof AgencyMemberRole)[keyof typeof AgencyMemberRole]
+
+
+export const AgencyMemberStatus = {
+  INVITED: 'INVITED',
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  REMOVED: 'REMOVED'
+} as const
+
+export type AgencyMemberStatus = (typeof AgencyMemberStatus)[keyof typeof AgencyMemberStatus]
+
+
+export const AgencyStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type AgencyStatus = (typeof AgencyStatus)[keyof typeof AgencyStatus]
+
+
+export const AgencyVerificationStatus = {
+  NOT_SUBMITTED: 'NOT_SUBMITTED',
+  PENDING: 'PENDING',
+  VERIFIED: 'VERIFIED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type AgencyVerificationStatus = (typeof AgencyVerificationStatus)[keyof typeof AgencyVerificationStatus]
+
+
+export const AgencyAvailabilityStatus = {
+  ONLINE: 'ONLINE',
+  OFFLINE: 'OFFLINE'
+} as const
+
+export type AgencyAvailabilityStatus = (typeof AgencyAvailabilityStatus)[keyof typeof AgencyAvailabilityStatus]
+
+
+export const AgencyAssignmentStatus = {
+  ASSIGNED: 'ASSIGNED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  STARTED: 'STARTED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  REASSIGNED: 'REASSIGNED'
+} as const
+
+export type AgencyAssignmentStatus = (typeof AgencyAssignmentStatus)[keyof typeof AgencyAssignmentStatus]
+
+
+export const BookingCancellationActor = {
+  CUSTOMER: 'CUSTOMER',
+  PROVIDER: 'PROVIDER',
+  AGENCY: 'AGENCY',
+  ADMIN: 'ADMIN',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type BookingCancellationActor = (typeof BookingCancellationActor)[keyof typeof BookingCancellationActor]
+
+
+export const BookingOTPType = {
+  SERVICE_START: 'SERVICE_START',
+  SERVICE_COMPLETION: 'SERVICE_COMPLETION'
+} as const
+
+export type BookingOTPType = (typeof BookingOTPType)[keyof typeof BookingOTPType]
+
+
+export const BookingRequestStatus = {
+  SENT: 'SENT',
+  DELIVERED: 'DELIVERED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BookingRequestStatus = (typeof BookingRequestStatus)[keyof typeof BookingRequestStatus]
+
+
+export const BookingRoundStatus = {
+  SEARCHING: 'SEARCHING',
+  ACCEPTED: 'ACCEPTED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type BookingRoundStatus = (typeof BookingRoundStatus)[keyof typeof BookingRoundStatus]
+
+
+export const BookingStatus = {
+  PENDING: 'PENDING',
+  SEARCHING_PROVIDER: 'SEARCHING_PROVIDER',
+  CONFIRMED: 'CONFIRMED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type BookingStatus = (typeof BookingStatus)[keyof typeof BookingStatus]
+
+
+export const BookingType = {
+  INSTANT: 'INSTANT',
+  SCHEDULED: 'SCHEDULED'
+} as const
+
+export type BookingType = (typeof BookingType)[keyof typeof BookingType]
+
+
+export const WalletTransactionType = {
+  CREDIT: 'CREDIT',
+  DEBIT: 'DEBIT'
+} as const
+
+export type WalletTransactionType = (typeof WalletTransactionType)[keyof typeof WalletTransactionType]
+
+
+export const WalletTransactionReason = {
+  BOOKING_PAYMENT: 'BOOKING_PAYMENT',
+  PLATFORM_COMMISSION: 'PLATFORM_COMMISSION',
+  REFUND: 'REFUND',
+  PAYOUT: 'PAYOUT',
+  BONUS: 'BONUS',
+  PENALTY: 'PENALTY',
+  WALLET_ADJUSTMENT: 'WALLET_ADJUSTMENT'
+} as const
+
+export type WalletTransactionReason = (typeof WalletTransactionReason)[keyof typeof WalletTransactionReason]
+
+
+export const WalletTransactionStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  REVERSED: 'REVERSED'
+} as const
+
+export type WalletTransactionStatus = (typeof WalletTransactionStatus)[keyof typeof WalletTransactionStatus]
+
+
+export const PayoutStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type PayoutStatus = (typeof PayoutStatus)[keyof typeof PayoutStatus]
+
+
+export const PaymentMethod = {
+  ONLINE: 'ONLINE',
+  CASH: 'CASH'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const WebhookEventStatus = {
+  RECEIVED: 'RECEIVED',
+  PROCESSED: 'PROCESSED',
+  FAILED: 'FAILED',
+  IGNORED: 'IGNORED'
+} as const
+
+export type WebhookEventStatus = (typeof WebhookEventStatus)[keyof typeof WebhookEventStatus]
+
+
+export const RefundStatus = {
+  REQUESTED: 'REQUESTED',
+  APPROVED: 'APPROVED',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  REJECTED: 'REJECTED',
+  FAILED: 'FAILED'
+} as const
+
+export type RefundStatus = (typeof RefundStatus)[keyof typeof RefundStatus]
+
+
+export const NotificationType = {
+  BOOKING: 'BOOKING',
+  PAYMENT: 'PAYMENT',
+  WALLET: 'WALLET',
+  AGENCY: 'AGENCY',
+  REVIEW: 'REVIEW',
+  SUPPORT: 'SUPPORT',
+  SYSTEM: 'SYSTEM',
+  PROMOTION: 'PROMOTION'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const SupportTicketCategory = {
+  BOOKING: 'BOOKING',
+  PAYMENT: 'PAYMENT',
+  REFUND: 'REFUND',
+  PROVIDER: 'PROVIDER',
+  AGENCY: 'AGENCY',
+  ACCOUNT: 'ACCOUNT',
+  OTHER: 'OTHER'
+} as const
+
+export type SupportTicketCategory = (typeof SupportTicketCategory)[keyof typeof SupportTicketCategory]
+
+
+export const SupportTicketPriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+} as const
+
+export type SupportTicketPriority = (typeof SupportTicketPriority)[keyof typeof SupportTicketPriority]
+
+
+export const SupportTicketStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  WAITING_FOR_USER: 'WAITING_FOR_USER',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type SupportTicketStatus = (typeof SupportTicketStatus)[keyof typeof SupportTicketStatus]
+
+
+export const CommissionType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FLAT: 'FLAT'
+} as const
+
+export type CommissionType = (typeof CommissionType)[keyof typeof CommissionType]
+
+
 export const AddressType = {
   HOME: 'HOME',
   WORK: 'WORK',
@@ -126,6 +359,23 @@ export const AddressType = {
 } as const
 
 export type AddressType = (typeof AddressType)[keyof typeof AddressType]
+
+
+export const DevicePlatform = {
+  ANDROID: 'ANDROID',
+  IOS: 'IOS',
+  WEB: 'WEB'
+} as const
+
+export type DevicePlatform = (typeof DevicePlatform)[keyof typeof DevicePlatform]
+
+
+export const AppType = {
+  CUSTOMER_APP: 'CUSTOMER_APP',
+  PROVIDER_APP: 'PROVIDER_APP'
+} as const
+
+export type AppType = (typeof AppType)[keyof typeof AppType]
 
 
 export const AccountStatus = {
@@ -150,6 +400,8 @@ export type Gender = (typeof Gender)[keyof typeof Gender]
 export const UserRoleType = {
   CUSTOMER: 'CUSTOMER',
   PROVIDER: 'PROVIDER',
+  AGENCY_OWNER: 'AGENCY_OWNER',
+  AGENCY_STAFF: 'AGENCY_STAFF',
   ADMIN: 'ADMIN',
   SUPPORT: 'SUPPORT'
 } as const
