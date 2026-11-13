@@ -15,9 +15,4 @@ const listServices = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, { success: true, statusCode: 200, message: "Services retrieved", data });
 });
 
-const setAvailability = catchAsync(async (req: Request, res: Response) => {
-    const data = await ProviderService.setAvailability(uid(req), req.body);
-    sendResponse(res, { success: true, statusCode: 200, message: "Availability updated", data });
-});
-
-export const ProviderController = { upsertService, listServices, setAvailability };
+export const ProviderController = { upsertService, listServices };

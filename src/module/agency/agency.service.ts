@@ -16,24 +16,7 @@ export const myAgencies = async (userId: number) =>
         },
     });
 
-export const setAgencyAvailability = async (
-    agencyId: number,
-    input: { status: "ONLINE" | "OFFLINE"; latitude?: number | undefined; longitude?: number | undefined }
-) => {
-    if (input.status === "ONLINE") {
-        const a = await prisma.agency.findUniqueOrThrow({ where: { id: agencyId }, select: { status: true } });
-        if (a.status !== "APPROVED") throw new AppError(403, "Agency must be approved before going online");
-    }
-    return prisma.agency.update({
-        where: { id: agencyId },
-        data: {
-            availabilityStatus: input.status,
-            ...(input.latitude !== undefined && { latitude: new Prisma.Decimal(input.latitude).toDecimalPlaces(7) }),
-            ...(input.longitude !== undefined && { longitude: new Prisma.Decimal(input.longitude).toDecimalPlaces(7) }),
-        },
-        select: { id: true, availabilityStatus: true, latitude: true, longitude: true },
-    });
-};
+// Online / offline is in availability/agency-availability.service.ts
 
 // ---------------------------------------------------------------
 // Services offered by the agency

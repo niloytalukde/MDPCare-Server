@@ -9,12 +9,6 @@ export const assignmentIdParam = z.object({ assignmentId: z.coerce.number().int(
 
 // registerAgencySchema moved to profile/agency-profile.validation.ts
 
-export const agencyAvailabilitySchema = z.object({
-    status: z.enum(["ONLINE", "OFFLINE"]),
-    latitude: z.number().min(-90).max(90).optional(),
-    longitude: z.number().min(-180).max(180).optional(),
-});
-
 export const agencyServiceSchema = z.object({
     serviceId: z.number().int().positive(),
     customPrice: z.number().nonnegative().max(10_000_000).nullable().optional(),

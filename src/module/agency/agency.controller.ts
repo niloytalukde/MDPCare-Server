@@ -16,10 +16,6 @@ const owner = (req: Request, res: Response) => requireAgencyMember(uid(req), p(r
 export const mine = catchAsync(async (req, res) => ok(res, "Memberships retrieved", await Agency.myAgencies(uid(req))));
 
 // ---- Owner management ----
-export const setAvailability = catchAsync(async (req, res) => {
-    await owner(req, res);
-    return ok(res, "Availability updated", await Agency.setAgencyAvailability(p(res).agencyId, req.body));
-});
 export const upsertService = catchAsync(async (req, res) => {
     await owner(req, res);
     return ok(res, "Service saved", await Agency.upsertAgencyService(p(res).agencyId, req.body));

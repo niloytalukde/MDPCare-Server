@@ -90,6 +90,12 @@ export const env = {
     BOOKING_MAX_CANDIDATES_PER_ROUND: int("BOOKING_MAX_CANDIDATES_PER_ROUND", 25),
     BOOKING_SWEEP_INTERVAL_SECONDS: int("BOOKING_SWEEP_INTERVAL_SECONDS", 10),
     BOOKING_COMPLETION_OTP_TTL_MINUTES: int("BOOKING_COMPLETION_OTP_TTL_MINUTES", 240),
+    // Provider live location (app sends it every 30 seconds)
+    // - every update is kept in Redis
+    // - it is written to the database at most once every PROVIDER_LOCATION_DB_SAVE_SECONDS
+    // - booking search ignores providers whose saved location is older than PROVIDER_LOCATION_STALE_SECONDS
+    PROVIDER_LOCATION_DB_SAVE_SECONDS: int("PROVIDER_LOCATION_DB_SAVE_SECONDS", 600), // 600 s = 10 minutes
+    PROVIDER_LOCATION_STALE_SECONDS: int("PROVIDER_LOCATION_STALE_SECONDS", 900), // 900 s = 15 minutes
     // Set to "false" to run without background workers (e.g. one-off scripts, tests)
     BOOKING_WORKERS_ENABLED: process.env.BOOKING_WORKERS_ENABLED !== "false",
 };

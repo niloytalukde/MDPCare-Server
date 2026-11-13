@@ -5,6 +5,7 @@ import { bookingOtpLimiter } from "../../middleware/rateLimiter.js";
 import * as C from "./agency.controller.js";
 import * as V from "./agency.validation.js";
 import { AgencyProfileRoutes } from "./profile/agency-profile.route.js";
+import { AgencyAvailabilityRoutes } from "./availability/agency-availability.route.js";
 
 // Mounted at /api/v1/agencies. Every route requires auth; agency-scoped routes
 // additionally verify membership of the :agencyId in the URL (agency.access.ts).
@@ -13,6 +14,9 @@ router.use(auth);
 
 // Register / agency profile / update profile  (profile/agency-profile.route.ts)
 router.use("/", AgencyProfileRoutes);
+
+// Online / offline  (availability/agency-availability.route.ts)
+router.use("/", AgencyAvailabilityRoutes);
 
 // My memberships
 router.get("/mine", C.mine);
@@ -26,7 +30,6 @@ router.post("/assignments/:assignmentId/start", validate({ params: V.assignmentI
 router.post("/assignments/:assignmentId/complete", bookingOtpLimiter, validate({ params: V.assignmentIdParam, body: V.completeSchema }), C.completeAssignment);
 
 // Owner: agency setup
-router.patch("/:agencyId/availability", validate({ params: V.agencyIdParam, body: V.agencyAvailabilitySchema }), C.setAvailability);
 router.put("/:agencyId/services", validate({ params: V.agencyIdParam, body: V.agencyServiceSchema }), C.upsertService);
 router.get("/:agencyId/members", validate({ params: V.agencyIdParam }), C.listMembers);
 router.post("/:agencyId/members", validate({ params: V.agencyIdParam, body: V.addStaffSchema }), C.addStaff);

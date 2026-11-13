@@ -1,6 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
 import { AppError } from "../../errors/AppError.js";
-import { Prisma } from "../../generated/prisma/client.js";
 import { money } from "../../utils/money.js";
 import { findProviderByUserId } from "./provider.repository.js";
 
@@ -35,29 +34,4 @@ export const listServices = async (userId: number) => {
     });
 };
 
-export const setAvailability = async (
-    userId: number,
-    input: { status: "ONLINE" | "OFFLINE"; latitude?: number | undefined; longitude?: number | undefined; serviceRadiusKm?: number | undefined }
-) => {
-    const provider = await requireProfile(userId);
-    if (input.status === "ONLINE" && (provider.status !== "APPROVED" || provider.verificationStatus !== "VERIFIED")) {
-        throw new AppError(403, "Your account must be approved and verified before going online");
-    }
-
-    return prisma.providerProfile.update({
-        where: { id: provider.id },
-        data: {
-            availabilityStatus: input.status,
-            isAvailable: input.status === "ONLINE",
-            ...(input.latitude !== undefined && {
-                latitude: new Prisma.Decimal(input.latitude).toDecimalPlaces(7),
-                longitude: new Prisma.Decimal(input.longitude as number).toDecimalPlaces(7),
-                locationUpdatedAt: new Date(),
-            }),
-            ...(input.serviceRadiusKm !== undefined && { serviceRadiusKm: input.serviceRadiusKm }),
-        },
-        select: { id: true, availabilityStatus: true, isAvailable: true, latitude: true, longitude: true, serviceRadiusKm: true },
-    });
-};
-
-export const ProviderService = { upsertService, listServices, setAvailability };
+export const ProviderService = { upsertService, listServices };

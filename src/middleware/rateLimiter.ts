@@ -58,3 +58,17 @@ export const bookingOtpLimiter = rateLimit({
     legacyHeaders: false,
     message: json("Too many attempts. Please try again later."),
 });
+
+/**
+ * Provider location: the app sends every 30 s. Allow at most 6 per minute
+ * per provider (1 every 10 s), so a buggy app can't flood the server.
+ * Must run AFTER `auth` (it uses the logged-in user id).
+ */
+export const locationUpdateLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    limit: 6,
+    keyGenerator: (req: Request) => `location|${req.user?.id ?? ip(req)}`,
+    standardHeaders: "draft-8",
+    legacyHeaders: false,
+    message: json("Location is being sent too often. Send it every 30 seconds."),
+});
